@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tag: ambient — Private Club</title>
+  <link rel="stylesheet" href="/css/win95.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🎵</text></svg>" />
+</head>
+<body>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <span class="marquee-inner">
+      ★ PRIVATE CLUB ★ Your underground music blog ★ Est. 1995 ★ 
+      Noise · Ambient · Electronic · Jazz · Post-Punk · Experimental · World · Outsider ★ 
+      NOW PLAYING on the server ★ PRIVATE CLUB ★
+    </span>
+  </div>
+
+  <div class="desktop">
+
+    <!-- SITE HEADER -->
+    <div class="window site-header-window">
+      <div class="window-titlebar">
+        <span>🎵 privateclub — escuchas reposadas</span>
+        <div class="titlebar-controls">
+          <span class="titlebar-btn">_</span>
+          <span class="titlebar-btn">□</span>
+          <a href="/" class="titlebar-btn">✕</a>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="site-hero">
+          <div class="site-logo">private<br>club</div>
+          <div>
+            <div class="site-tagline">// selecciones musicales para escuchas activas e íntimas //</div>
+            <div class="site-tagline" style="margin-top:4px;color:#808080;">curaduría personal desde las profundidades de la web</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID: sidebar + main -->
+    <div class="desktop-grid">
+
+      <!-- SIDEBAR -->
+      <aside>
+        <div class="window sidebar-window">
+          <div class="window-titlebar">
+            <span>📁 Navegación</span>
+          </div>
+          <div class="window-content">
+
+            <div class="sidebar-section">
+              <div class="sidebar-label">CARPETAS</div>
+              <ul class="sidebar-links">
+                <li><a href="/">🏠 Home</a></li>
+                <li><a href="/posts/">📰 Todos los posts</a></li>
+                <li><a href="/about/">👤 Acerca de</a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-section">
+              <div class="sidebar-label">GÉNEROS</div>
+              <div class="tag-list">
+                <a class="tag" href="/tags/ambient/">Ambient</a>
+                <a class="tag" href="/tags/electronic/">Electronic</a>
+                <a class="tag" href="/tags/jazz/">Jazz</a>
+                <a class="tag" href="/tags/seleccion/">selecciones</a>
+                <a class="tag" href="/tags/post-punk/">Post-Punk</a>
+                <a class="tag" href="/tags/experimental/">Experimental</a>
+                <a class="tag" href="/tags/world/">World</a>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <div class="sidebar-label">AHORA SUENA</div>
+              <div class="now-playing inset">
+                <span>♪</span>
+                <span class="np-track">Boards of Canada<br>— Music Has the Right to Children</span>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <div class="sidebar-label">CONTADOR DE VISITAS</div>
+              <div class="inset" style="font-size:14px;text-align:center;">
+                <span style="color:#000080;font-size:20px;">00,001</span><br>
+                visitas desde el lanzamiento
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main>
+        <div class="window">
+  <div class="window-titlebar">
+    <span>🏷️ Tag: ambient</span>
+    <div class="titlebar-controls">
+      <span class="titlebar-btn">_</span>
+      <span class="titlebar-btn">□</span>
+      <a href="/tags/" class="titlebar-btn">✕</a>
+    </div>
+  </div>
+  <div class="window-content">
+    
+    
+      <ul class="post-list">
+        
+          <li class="post-card">
+            <div class="post-card-header">
+              <h2 class="post-card-title">
+                <a href="/posts/boards-of-canada/">Boards of Canada: The Architecture of Memory</a>
+              </h2>
+              <span class="post-card-date">November 14, 2024</span>
+            </div>
+            
+              <div class="post-card-tags">
+                
+                  
+                
+                  
+                    <a class="tag" href="/tags/ambient/">ambient</a>
+                  
+                
+                  
+                    <a class="tag" href="/tags/electronic/">electronic</a>
+                  
+                
+              </div>
+            
+            
+              <p class="post-card-excerpt">Music Has the Right to Children sounds like a memory you can&#39;t quite place — warm, slightly degraded, and completely consuming.</p>
+            
+            <a href="/posts/boards-of-canada/" class="read-more">Read more »</a>
+          </li>
+        
+      </ul>
+    
+    <div style="margin-top:12px;">
+      <a href="/tags/" class="btn">← All Tags</a>
+    </div>
+  </div>
+</div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- TASKBAR -->
+  <div class="taskbar">
+    <a href="/" class="start-btn">
+      <span class="start-icon"></span>
+      Start
+    </a>
+    <div class="taskbar-nav">
+      <a href="/" class="taskbar-item">🏠 Home</a>
+      <a href="/posts/" class="taskbar-item">📰 Posts</a>
+      <a href="/about/" class="taskbar-item">👤 Acerca</a>
+    </div>
+    <div class="taskbar-clock" id="clock">--:--</div>
+  </div>
+
+  <script>
+    // Live clock
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+  </script>
+</body>
+</html>

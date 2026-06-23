@@ -1,0 +1,40 @@
+---
+layout: base.njk
+---
+<div class="window">
+  <div class="window-titlebar">
+    <span>📝 {{ title }}</span>
+    <div class="titlebar-controls">
+      <span class="titlebar-btn">_</span>
+      <span class="titlebar-btn">□</span>
+      <a href="/posts/" class="titlebar-btn">✕</a>
+    </div>
+  </div>
+  <div class="window-content">
+    <div class="post-header">
+      <h1 class="post-title">{{ title }}</h1>
+      <div class="post-meta">
+        <span>📅 {{ date | dateFormat }}</span>
+        {% if tags %}
+          <span>
+            🏷️
+            {% for tag in tags %}
+              {% if tag != "posts" %}
+                <a class="tag" href="/tags/{{ tag }}/">{{ tag }}</a>
+              {% endif %}
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="inset post-body">
+      {{ content | safe }}
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:8px;">
+      <a href="/posts/" class="btn">← Back to Posts</a>
+      <a href="/" class="btn">🏠 Home</a>
+    </div>
+  </div>
+</div>

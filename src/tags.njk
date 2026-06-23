@@ -1,0 +1,22 @@
+---
+layout: base.njk
+title: Tags
+permalink: /tags/
+---
+<div class="window">
+  <div class="window-titlebar">
+    <span>🏷️ All Tags</span>
+  </div>
+  <div class="window-content">
+    <div class="tag-list" style="padding:8px;">
+      {% set allTags = [] %}
+      {% for post in collections.posts %}
+        {% for tag in post.data.tags %}
+          {% if tag != "posts" %}
+            <a class="tag" href="/tags/{{ tag }}/">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

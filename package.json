@@ -1,0 +1,13 @@
+{
+  "name": "privateclub",
+  "version": "1.0.0",
+  "description": "privateclub — Windows 95 music blog powered by Eleventy",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "dev": "eleventy --serve --watch"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}

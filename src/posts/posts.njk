@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: All Posts
+permalink: /posts/
+---
+<div class="window">
+  <div class="window-titlebar">
+    <span>📰 All Posts ({{ collections.posts.length }})</span>
+    <div class="titlebar-controls">
+      <span class="titlebar-btn">_</span>
+      <span class="titlebar-btn">□</span>
+      <a href="/" class="titlebar-btn">✕</a>
+    </div>
+  </div>
+  <div class="window-content">
+    {% if collections.posts.length %}
+      <ul class="post-list">
+        {% for post in collections.posts %}
+          <li class="post-card">
+            <div class="post-card-header">
+              <h2 class="post-card-title">
+                <a href="{{ post.url }}">{{ post.data.title }}</a>
+              </h2>
+              <span class="post-card-date">{{ post.date | dateFormat }}</span>
+            </div>
+            {% if post.data.tags %}
+              <div class="post-card-tags">
+                {% for tag in post.data.tags %}
+                  {% if tag != "posts" %}
+                    <a class="tag" href="/tags/{{ tag }}/">{{ tag }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if post.data.excerpt %}
+              <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
+            {% endif %}
+            <a href="{{ post.url }}" class="read-more">Read more »</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="inset" style="color:#808080;">No posts yet.</div>
+    {% endif %}
+  </div>
+</div>
