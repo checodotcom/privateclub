@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "privateclub Marzo 2025"
+title: "privateclub - Marzo 2025"
 date: 2025-04-28
 tags:
   - posts
