@@ -151,10 +151,10 @@ body {
   font-family: 'VT323', monospace;
   font-size: 16px;
   background: var(--win-gray);
-  border-top: 2px solid var(--win-white);
-  border-left: 2px solid var(--win-white);
-  border-right: 2px solid var(--win-darker);
-  border-bottom: 2px solid var(--win-darker);
+  border-top: 2px solid var(--win-darker);
+  border-left: 2px solid var(--win-darker);
+  border-right: 2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
   color: var(--win-black);
   cursor: default;
   white-space: nowrap;
