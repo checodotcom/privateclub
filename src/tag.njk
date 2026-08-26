@@ -10,11 +10,11 @@ pagination:
     - tagList
 permalink: /tags/{{ tag }}/
 eleventyComputed:
-  title: "Tag: {{ tag }}"
+  title: "{{ tag }}"
 ---
 <div class="window">
   <div class="window-titlebar">
-    <span>🏷️ Tag: {{ tag }}</span>
+    <span>🏷️ {{ tag }}</span>
     <div class="titlebar-controls">
       <input type="checkbox" id="tag-window-minimize" class="window-toggle window-minimize sr-only">
       <label for="tag-window-minimize" class="titlebar-btn">_</label>
@@ -52,10 +52,10 @@ eleventyComputed:
         {% endfor %}
       </ul>
     {% else %}
-      <div class="inset" style="color:#808080;">No posts with this tag yet.</div>
+      <div class="inset" style="color:#808080;">Sin posts con este tag todavía.</div>
     {% endif %}
     <div style="margin-top:12px;">
-      <a href="/tags/" class="btn">← All Tags</a>
+      <a href="/tags/" class="btn">← Todos los tags</a>
     </div>
   </div>
 </div>

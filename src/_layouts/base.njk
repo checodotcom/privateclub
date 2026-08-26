@@ -118,11 +118,11 @@
       <span class="start-icon"></span>
       Start
     </a>
-    <div class="taskbar-nav">
-      <a href="/" class="taskbar-item">🏠 Home</a>
-      <a href="/posts/" class="taskbar-item">📰 Posts</a>
-      <a href="/about/" class="taskbar-item">👤 Acerca</a>
-    </div>
+    {% if page.url != "/" %}
+      <div class="taskbar-nav">
+        <span class="taskbar-current">{{ title }}</span>
+      </div>
+    {% endif %}
     <div class="taskbar-clock" id="clock">--:--</div>
   </div>
 

@@ -146,6 +146,23 @@ body {
   cursor: pointer;
 }
 
+.taskbar-current {
+  padding: 2px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  background: var(--win-gray);
+  border-top: 2px solid var(--win-white);
+  border-left: 2px solid var(--win-white);
+  border-right: 2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  color: var(--win-black);
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
 .taskbar-item:hover, .taskbar-item.active {
   background: var(--win-highlight);
   color: var(--win-white);
@@ -162,7 +179,7 @@ body {
 }
 
 .window-titlebar {
-  background: linear-gradient(to right, var(--win-blue), #1084d0);
+  background: var(--win-blue);
   color: var(--win-title-text);
   padding: 3px 6px;
   display: flex;
