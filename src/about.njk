@@ -14,23 +14,7 @@ permalink: /about/
   </div>
   <div class="window-content">
     <div class="inset post-body">
-      <h2>Qué es privateclub?</h2>
-      <p>
-        privateclub es en donde comparto música que encontré en las no tan profundas áreas
-        del internet, y probablemente olvide fácilmente si no las destaco de alguna manera.
-      </p>
-
-      <h2>Qué puedes encontrar aquí?</h2>
-      <p>
-        Música que me me causa algo especial y espero a los demás escuchas también.
-        Me gusta enfocarme en música de escucha personal, convirtiendo el lugar en el que estás en el mejor club privado posible.
-      </p>
-
-      <h2>Quién escribe esto?</h2>
-      <p>
-        Una persona que busca sonidos originales, se cansa rápidamente de escuchar lo mismo en repetidas ocasiones, salvo algunas excepciones.
-        Escribiendo desde un lugar cálido. Escuchando contantemente.
-      </p>
+      {{ about.content | markdown | safe }}
 
       <hr />
 

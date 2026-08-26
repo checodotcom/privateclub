@@ -38,6 +38,11 @@ collections:
         multiple: true
         default: ["posts"]
         options: ["posts", "seleccion", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world", "downtempo", "trip-hop"]
+      - label: "La selección"
+        name: "seleccionUrl"
+        widget: "string"
+        required: false
+        hint: "Link para compartir de una playlist, álbum o track de Spotify. Solo se muestra en el sitio cuando la Categoría es Selecciones."
       - {label: "Cuerpo", name: "body", widget: "markdown"}
 
   - name: "categorias"
@@ -54,3 +59,29 @@ collections:
       - {label: "Nombre", name: "nombre", widget: "string"}
       - {label: "Descripción", name: "descripcion", widget: "text", required: false}
       - {label: "Color de acento", name: "color", widget: "color", required: false, allowInput: true}
+
+  - name: "config"
+    label: "Configuración"
+    files:
+      - file: "src/_data/site.json"
+        label: "Configuración del sitio"
+        name: "site"
+        fields:
+          - {label: "Ahora suena — Artista", name: "nowPlayingArtist", widget: "string", required: false}
+          - {label: "Ahora suena — Álbum / Canción", name: "nowPlayingTrack", widget: "string", required: false}
+          - label: "Redes sociales"
+            name: "socialLinks"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Nombre", name: "label", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+
+  - name: "about"
+    label: "Acerca de"
+    files:
+      - file: "src/_data/about.json"
+        label: "Página Acerca de"
+        name: "about"
+        fields:
+          - {label: "Contenido", name: "content", widget: "markdown"}

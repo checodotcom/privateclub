@@ -84,9 +84,20 @@
               <div class="sidebar-label">AHORA SUENA</div>
               <div class="now-playing inset">
                 <span>♪</span>
-                <span class="np-track">Boards of Canada<br>— Music Has the Right to Children</span>
+                <span class="np-track">{{ site.nowPlayingArtist }}<br>— {{ site.nowPlayingTrack }}</span>
               </div>
             </div>
+
+            {% if site.socialLinks and site.socialLinks.length %}
+            <div class="sidebar-section">
+              <div class="sidebar-label">REDES</div>
+              <ul class="sidebar-links">
+                {% for link in site.socialLinks %}
+                  <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
 
             <div class="sidebar-section">
               <div class="sidebar-label">CONTADOR DE VISITAS</div>

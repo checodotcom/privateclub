@@ -1,3 +1,5 @@
+const markdownIt = require("markdown-it")({ html: true });
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
@@ -20,6 +22,15 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("limit", function(arr, limit) {
     return arr.slice(0, limit);
+  });
+
+  eleventyConfig.addFilter("markdown", function(content) {
+    return markdownIt.render(content || "");
+  });
+
+  eleventyConfig.addFilter("spotifyEmbedUrl", function(url) {
+    const match = String(url || "").match(/open\.spotify\.com\/(playlist|album|track|show|episode)\/([a-zA-Z0-9]+)/);
+    return match ? `https://open.spotify.com/embed/${match[1]}/${match[2]}` : "";
   });
 
   return {
