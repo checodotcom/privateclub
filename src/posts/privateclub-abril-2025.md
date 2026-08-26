@@ -1,11 +1,14 @@
 ---
 layout: post.njk
-title: "privateclub - Abril 2025"
+title: privateclub - Abril 2025
 date: 2025-05-03
+image: ''
+excerpt: Comenzando a tirar nuevas raíces.
+categoria: ''
 tags:
   - posts
   - seleccion
-excerpt: "Comenzando a tirar nuevas raíces."
+seleccionUrl: ''
 ---
 
 A inicios de mes, en algún Tiktok me había salido que abril iba a ser un mes que me daría demasiado, que iba a ser sumamente generoso y traería consigo muchos cambios. No suelo dar importancia a ese tipo de cosas, como la astrología ni números sagrados… nada de eso. Me causó curiosidad porque enfatizaba realmente lo dadivoso que iba a ser conmigo el mes por venir. Yo sólo pensé: “Pues a ver si sí’.
@@ -14,7 +17,7 @@ Desde que decidí reubicarme fuera de la ciudad de manera indefinida, he sentido
 
 La selección de privateclub de abril trae consigo varios de los géneros que frecuento, desde fusiones de jazz, sonidos electrónicos, dub, synth-pop, nu-disco, reggae y algunas excepciones entre ellos.
 
-## La playlist
+## La selección
 
 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5TxekzmrRXxFgQgpiRsowC?utm_source=generator&si=d0c24fdafacc408c" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
@@ -45,5 +48,3 @@ Sade, con esta joya no tan conocida, Never as Good as the First Time, retoma el 
 De aquí comienza el cierre, End Of Normality tiene una guitarra nocturna, viajada y relajada, que alivia los pesares y te permite disfrutar de los sonidos dejando atrás los corazones rotos y las preocupaciones por el futuro. Te trae al hoy. Seguido del mestro Vini Reilly, y esta obra enorme, Guitar For Mother, de uno de mis discos favoritos de toda la vida, Fidelity.
 
 El final nos lo deja Akofa Akoussah, con una voz medicial que se siente como un alivio para todos los males. No tengo idea de lo que canta, pero me pone de buenas, y en un estado en el que me he encontrado estos días, de paz, por permitirme tomar las decisiones que quiero, y de lograrlo con éxito rotundo.
-
-
