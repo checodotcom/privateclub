@@ -12,6 +12,9 @@ layout: base.njk
   </div>
   <div class="window-content">
     <div class="post-header">
+      {% if image %}
+        <img class="post-cover" src="{{ image }}" alt="{{ title }}" />
+      {% endif %}
       <h1 class="post-title">{{ title }}</h1>
       <div class="post-meta">
         <span>📅 {{ date | dateFormat }}</span>
