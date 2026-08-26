@@ -8,6 +8,13 @@ categoria: resenas
 tags:
   - posts
   - experimental
+  - trip-hop
+  - downtempo
+seleccionUrl: ''
 ---
 
-Reseña por desarrollar.
+Sin conocer al grupo autor de _Given Nature_, el más reciente proyecto de ANiML cruzó mi camino en la forma de reel mencionando álbumes destacados lanzados recientemente. He tenido dificultades para recordar al usuario que lo subió, prometo actualizarlo si doy con el video corto con el cual estoy ampliamente agradecido.
+
+Si bien desde haber escuchado pocos segundos de la canción que inaugura a Given Nature cautivó mi atención instantáneamente, la primera escucha fue de asombro y agradecimiento. Tenía tiempo que no escuchaba algo que llenara mis oídos de esta manera. Recuerdo haber estado clavado con el _Confusions_ de L'Éclair, o con _III_ de BADBADNOTGOOD, y _Given Nature_ se siente que va un poco sobre esa línea, quizás con más rasgos de Trip-Hop y experimentación de sonidos más inclinados hacia la exploración de texturas y sonidos más oscuros y seductores impulsados por el bajo siempre presente.
+
+En la descripción del álbum el grupo menciona que este lanzamiento se ubica en el espectro de DJ Shadow, Portishead y SAULT, y nos invitan a reproducirlo en más de una ocasión, idealmente en distintos lugares y diferentes momentos del día, ya que poco a poco va revelando nuevos sonidos que se hacen presentes a través de cada escucha.
