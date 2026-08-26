@@ -1,12 +1,15 @@
 ---
 layout: post.njk
-title: "privateclub - Marzo 2025"
+title: privateclub - Marzo 2025
 date: 2025-04-28
+image: ''
+excerpt: La primera selección bajo privateclub pertenece a Marzo del 2025, y trae mucho de lo que vivía a inicios de mes.
+categoria: ''
 tags:
   - posts
   - seleccion
   - experimental
-excerpt: "La primera selección bajo privateclub pertenece a Marzo del 2025, y trae mucho de lo que vivía a inicios de mes."
+seleccionUrl: ''
 ---
 
 La primera selección mensual en mi llegada a Puerto Escondido.
@@ -27,6 +30,6 @@ El cierre de la selección se enfoca más en ritmos bailables, con José Felicia
 
 Les dejo el enlace a la playlist a continuación, y cualquier comentario es bien recibido.
 
-## La Playlist
+## La selección
 
 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3XKoVU4Qiu8o3azP24mQro?utm_source=generator&si=543cd0c502774af0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
