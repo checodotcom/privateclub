@@ -618,6 +618,12 @@ body {
   .desktop-grid {
     grid-template-columns: 1fr;
   }
+  .desktop-grid--nav-last aside {
+    order: 2;
+  }
+  .desktop-grid--nav-last main {
+    order: 1;
+  }
   .site-logo { height: 48px; }
   .post-title { font-size: 26px; }
 }
