@@ -1,0 +1,55 @@
+backend:
+  name: github
+  repo: checodotcom/privateclub
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "src/img"
+public_folder: "/img"
+
+collections:
+  - name: "posts"
+    label: "Reseñas"
+    label_singular: "Reseña"
+    description: "Reseñas y selecciones musicales de privateclub."
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post.njk"}
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true}
+      - {label: "Imagen de portada", name: "image", widget: "image", required: false, media_folder: "/src/img", public_folder: "/img"}
+      - {label: "Extracto", name: "excerpt", widget: "text", hint: "Descripción corta que aparece en la lista de posts."}
+      - label: "Categoría"
+        name: "categoria"
+        widget: "relation"
+        collection: "categorias"
+        search_fields: ["nombre"]
+        value_field: "{{slug}}"
+        display_fields: ["nombre"]
+        required: false
+      - label: "Tags"
+        name: "tags"
+        widget: "select"
+        multiple: true
+        default: ["posts"]
+        options: ["posts", "seleccion", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world"]
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
+
+  - name: "categorias"
+    label: "Categorías"
+    label_singular: "Categoría"
+    description: "Tipos de contenido editorial (distinto de los tags de género musical)."
+    folder: "src/_data/categorias"
+    create: true
+    slug: "{{slug}}"
+    extension: "yml"
+    format: "yml"
+    fields:
+      - {label: "Nombre", name: "nombre", widget: "string"}
+      - {label: "Descripción", name: "descripcion", widget: "text", required: false}
+      - {label: "Color de acento", name: "color", widget: "color", required: false, allowInput: true}
