@@ -11,9 +11,11 @@ module.exports = function(eleventyConfig) {
 
   // Filters
   eleventyConfig.addFilter("dateFormat", function(date) {
-    return new Date(date).toLocaleDateString("es-ES", {
-      year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
-    });
+    const d = new Date(date);
+    const day = d.toLocaleDateString("es-ES", { day: "numeric", timeZone: "UTC" });
+    const month = d.toLocaleDateString("es-ES", { month: "long", timeZone: "UTC" });
+    const year = d.toLocaleDateString("es-ES", { year: "numeric", timeZone: "UTC" });
+    return `${day}/${month}/${year}`;
   });
 
   eleventyConfig.addFilter("limit", function(arr, limit) {
