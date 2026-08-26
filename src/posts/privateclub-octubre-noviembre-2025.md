@@ -8,6 +8,7 @@ categoria: selecciones
 tags:
   - posts
   - world
+  - seleccion
 seleccionUrl: ''
 ---
 
