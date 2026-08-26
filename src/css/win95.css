@@ -20,6 +20,18 @@
   --accent: #ff00ff;          /* neon magenta — the signature */
 }
 
+/* ===== FOCUS VISIBILITY ===== */
+a:focus-visible,
+.btn:focus-visible,
+.start-btn:focus-visible,
+.taskbar-item:focus-visible,
+.tag:focus-visible,
+.tag-more-label:focus-visible,
+.sidebar-links a:focus-visible {
+  outline: 2px dashed var(--win-blue);
+  outline-offset: 2px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -185,6 +197,34 @@ body {
   text-decoration: none;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.window-toggle:focus-visible + .titlebar-btn {
+  outline: 2px dashed var(--win-blue);
+  outline-offset: 2px;
+}
+
+.window:has(.window-minimize:checked) .window-content {
+  display: none;
+}
+
+.window:has(.window-maximize:checked) {
+  position: fixed;
+  inset: 16px;
+  z-index: 2000;
+  overflow: auto;
+}
+
 .window-content {
   padding: 12px;
 }
@@ -297,6 +337,8 @@ body {
 
 .tag-list .tag-extra {
   display: none;
+  opacity: 0;
+  transition: opacity 160ms ease, display 160ms allow-discrete;
 }
 
 .tag-more-toggle:checked ~ .tag-more-label-start {
@@ -305,6 +347,11 @@ body {
 
 .tag-more-toggle:checked ~ .tag-extra {
   display: inline;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .tag-more-toggle:checked ~ .tag-more-label-end {
@@ -496,28 +543,6 @@ body {
   display: block;
 }
 
-/* ===== MARQUEE ===== */
-.marquee-bar {
-  background: var(--win-blue);
-  color: var(--win-white);
-  font-size: 14px;
-  padding: 3px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-bottom: 12px;
-}
-
-.marquee-inner {
-  display: inline-block;
-  animation: marquee 20s linear infinite;
-  padding-left: 100%;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
@@ -536,7 +561,12 @@ body {
   color: var(--win-black);
 }
 
-.btn:active, .btn:hover {
+.btn:hover {
+  background: var(--win-highlight);
+  color: var(--win-white);
+}
+
+.btn:active {
   border-top: 2px solid var(--win-darker);
   border-left: 2px solid var(--win-darker);
   border-right: 2px solid var(--win-white);

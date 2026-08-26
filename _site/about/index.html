@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,15 +9,6 @@
 </head>
 <body>
 
-  <!-- MARQUEE -->
-  <div class="marquee-bar">
-    <span class="marquee-inner">
-      ★ PRIVATE CLUB ★ Your underground music blog ★ Est. 1995 ★ 
-      Noise · Ambient · Electronic · Jazz · Post-Punk · Experimental · World · Outsider ★ 
-      NOW PLAYING on the server ★ PRIVATE CLUB ★
-    </span>
-  </div>
-
   <div class="desktop">
 
     <!-- SITE HEADER -->
@@ -25,8 +16,10 @@
       <div class="window-titlebar">
         <span>🎵 privateclub — escuchas reposadas</span>
         <div class="titlebar-controls">
-          <span class="titlebar-btn">_</span>
-          <span class="titlebar-btn">□</span>
+          <input type="checkbox" id="site-window-minimize" class="window-toggle window-minimize sr-only">
+          <label for="site-window-minimize" class="titlebar-btn">_</label>
+          <input type="checkbox" id="site-window-maximize" class="window-toggle window-maximize sr-only">
+          <label for="site-window-maximize" class="titlebar-btn">□</label>
           <a href="/" class="titlebar-btn">✕</a>
         </div>
       </div>
@@ -68,9 +61,15 @@
                 <a class="tag" href="/tags/electronic/">Electronic</a>
                 <a class="tag" href="/tags/jazz/">Jazz</a>
                 <a class="tag" href="/tags/seleccion/">selecciones</a>
-                <a class="tag" href="/tags/post-punk/">Post-Punk</a>
-                <a class="tag" href="/tags/experimental/">Experimental</a>
-                <a class="tag" href="/tags/world/">World</a>
+                <input type="checkbox" id="tags-more-toggle" class="tag-more-toggle" hidden>
+                <label for="tags-more-toggle" class="tag-more-label tag-more-label-start">más...</label>
+                <a class="tag tag-extra" href="/tags/post-punk/">Post-Punk</a>
+                <a class="tag tag-extra" href="/tags/experimental/">Experimental</a>
+                <a class="tag tag-extra" href="/tags/world/">World</a>
+                <a class="tag tag-extra" href="/tags/noise/">Noise</a>
+                <a class="tag tag-extra" href="/tags/downtempo/">Downtempo</a>
+                <a class="tag tag-extra" href="/tags/trip-hop/">Trip-Hop</a>
+                <label for="tags-more-toggle" class="tag-more-label tag-more-label-end">menos</label>
               </div>
             </div>
 
@@ -81,6 +80,8 @@
                 <span class="np-track">Boards of Canada<br>— Music Has the Right to Children</span>
               </div>
             </div>
+
+            
 
             <div class="sidebar-section">
               <div class="sidebar-label">CONTADOR DE VISITAS</div>
@@ -100,30 +101,25 @@
   <div class="window-titlebar">
     <span>👤 Acerca de — privateclub</span>
     <div class="titlebar-controls">
-      <span class="titlebar-btn">_</span>
-      <span class="titlebar-btn">□</span>
+      <input type="checkbox" id="about-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="about-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="about-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="about-window-maximize" class="titlebar-btn">□</label>
       <a href="/" class="titlebar-btn">✕</a>
     </div>
   </div>
   <div class="window-content">
     <div class="inset post-body">
       <h2>Qué es privateclub?</h2>
-      <p>
-        privateclub es en donde comparto música que encontré en las no tan profundas áreas
-        del internet, y probablemente olvide fácilmente si no las destaco de alguna manera.
-      </p>
+<p>privateclub es en donde comparto música que encontré en las no tan profundas áreas
+del internet, y probablemente olvide fácilmente si no las destaco de alguna manera.</p>
+<h2>Qué puedes encontrar aquí?</h2>
+<p>Música que me me causa algo especial y espero a los demás escuchas también.
+Me gusta enfocarme en música de escucha personal, convirtiendo el lugar en el que estás en el mejor club privado posible.</p>
+<h2>Quién escribe esto?</h2>
+<p>Una persona que busca sonidos originales, se cansa rápidamente de escuchar lo mismo en repetidas ocasiones, salvo algunas excepciones.
+Escribiendo desde un lugar cálido. Escuchando contantemente.</p>
 
-      <h2>Qué puedes encontrar aquí?</h2>
-      <p>
-        Música que me me causa algo especial y espero a los demás escuchas también.
-        Me gusta enfocarme en música de escucha personal, convirtiendo el lugar en el que estás en el mejor club privado posible.
-      </p>
-
-      <h2>Quién escribe esto?</h2>
-      <p>
-        Una persona que busca sonidos originales, se cansa rápidamente de escuchar lo mismo en repetidas ocasiones, salvo algunas excepciones.
-        Escribiendo desde un lugar cálido. Escuchando contantemente.
-      </p>
 
       <hr />
 

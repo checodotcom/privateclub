@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,15 +9,6 @@
 </head>
 <body>
 
-  <!-- MARQUEE -->
-  <div class="marquee-bar">
-    <span class="marquee-inner">
-      ★ PRIVATE CLUB ★ Your underground music blog ★ Est. 1995 ★ 
-      Noise · Ambient · Electronic · Jazz · Post-Punk · Experimental · World · Outsider ★ 
-      NOW PLAYING on the server ★ PRIVATE CLUB ★
-    </span>
-  </div>
-
   <div class="desktop">
 
     <!-- SITE HEADER -->
@@ -25,8 +16,10 @@
       <div class="window-titlebar">
         <span>🎵 privateclub — escuchas reposadas</span>
         <div class="titlebar-controls">
-          <span class="titlebar-btn">_</span>
-          <span class="titlebar-btn">□</span>
+          <input type="checkbox" id="site-window-minimize" class="window-toggle window-minimize sr-only">
+          <label for="site-window-minimize" class="titlebar-btn">_</label>
+          <input type="checkbox" id="site-window-maximize" class="window-toggle window-maximize sr-only">
+          <label for="site-window-maximize" class="titlebar-btn">□</label>
           <a href="/" class="titlebar-btn">✕</a>
         </div>
       </div>

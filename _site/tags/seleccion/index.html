@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,15 +9,6 @@
 </head>
 <body>
 
-  <!-- MARQUEE -->
-  <div class="marquee-bar">
-    <span class="marquee-inner">
-      ★ PRIVATE CLUB ★ Your underground music blog ★ Est. 1995 ★ 
-      Noise · Ambient · Electronic · Jazz · Post-Punk · Experimental · World · Outsider ★ 
-      NOW PLAYING on the server ★ PRIVATE CLUB ★
-    </span>
-  </div>
-
   <div class="desktop">
 
     <!-- SITE HEADER -->
@@ -25,8 +16,10 @@
       <div class="window-titlebar">
         <span>🎵 privateclub — escuchas reposadas</span>
         <div class="titlebar-controls">
-          <span class="titlebar-btn">_</span>
-          <span class="titlebar-btn">□</span>
+          <input type="checkbox" id="site-window-minimize" class="window-toggle window-minimize sr-only">
+          <label for="site-window-minimize" class="titlebar-btn">_</label>
+          <input type="checkbox" id="site-window-maximize" class="window-toggle window-maximize sr-only">
+          <label for="site-window-maximize" class="titlebar-btn">□</label>
           <a href="/" class="titlebar-btn">✕</a>
         </div>
       </div>
@@ -68,9 +61,15 @@
                 <a class="tag" href="/tags/electronic/">Electronic</a>
                 <a class="tag" href="/tags/jazz/">Jazz</a>
                 <a class="tag" href="/tags/seleccion/">selecciones</a>
-                <a class="tag" href="/tags/post-punk/">Post-Punk</a>
-                <a class="tag" href="/tags/experimental/">Experimental</a>
-                <a class="tag" href="/tags/world/">World</a>
+                <input type="checkbox" id="tags-more-toggle" class="tag-more-toggle" hidden>
+                <label for="tags-more-toggle" class="tag-more-label tag-more-label-start">más...</label>
+                <a class="tag tag-extra" href="/tags/post-punk/">Post-Punk</a>
+                <a class="tag tag-extra" href="/tags/experimental/">Experimental</a>
+                <a class="tag tag-extra" href="/tags/world/">World</a>
+                <a class="tag tag-extra" href="/tags/noise/">Noise</a>
+                <a class="tag tag-extra" href="/tags/downtempo/">Downtempo</a>
+                <a class="tag tag-extra" href="/tags/trip-hop/">Trip-Hop</a>
+                <label for="tags-more-toggle" class="tag-more-label tag-more-label-end">menos</label>
               </div>
             </div>
 
@@ -81,6 +80,8 @@
                 <span class="np-track">Boards of Canada<br>— Music Has the Right to Children</span>
               </div>
             </div>
+
+            
 
             <div class="sidebar-section">
               <div class="sidebar-label">CONTADOR DE VISITAS</div>
@@ -100,8 +101,10 @@
   <div class="window-titlebar">
     <span>🏷️ Tag: seleccion</span>
     <div class="titlebar-controls">
-      <span class="titlebar-btn">_</span>
-      <span class="titlebar-btn">□</span>
+      <input type="checkbox" id="tag-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="tag-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="tag-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="tag-window-maximize" class="titlebar-btn">□</label>
       <a href="/tags/" class="titlebar-btn">✕</a>
     </div>
   </div>
@@ -115,7 +118,7 @@
               <h2 class="post-card-title">
                 <a href="/posts/privateclub-junio-2025/">privateclub - Junio 2025</a>
               </h2>
-              <span class="post-card-date">June 29, 2025</span>
+              <span class="post-card-date">30/junio/2025</span>
             </div>
             
               <div class="post-card-tags">
@@ -139,7 +142,7 @@
               <h2 class="post-card-title">
                 <a href="/posts/privateclub-mayo-2025/">privateclub - Mayo 2025</a>
               </h2>
-              <span class="post-card-date">June 12, 2025</span>
+              <span class="post-card-date">13/junio/2025</span>
             </div>
             
               <div class="post-card-tags">
@@ -167,7 +170,7 @@
               <h2 class="post-card-title">
                 <a href="/posts/privateclub-abril-2025/">privateclub - Abril 2025</a>
               </h2>
-              <span class="post-card-date">May 2, 2025</span>
+              <span class="post-card-date">3/mayo/2025</span>
             </div>
             
               <div class="post-card-tags">
@@ -191,7 +194,7 @@
               <h2 class="post-card-title">
                 <a href="/posts/privateclub-marzo-2025/">privateclub - Marzo 2025</a>
               </h2>
-              <span class="post-card-date">April 27, 2025</span>
+              <span class="post-card-date">28/abril/2025</span>
             </div>
             
               <div class="post-card-tags">

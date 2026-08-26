@@ -5,8 +5,10 @@ layout: base.njk
   <div class="window-titlebar">
     <span>📝 {{ title }}</span>
     <div class="titlebar-controls">
-      <span class="titlebar-btn">_</span>
-      <span class="titlebar-btn">□</span>
+      <input type="checkbox" id="post-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="post-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="post-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="post-window-maximize" class="titlebar-btn">□</label>
       <a href="/posts/" class="titlebar-btn">✕</a>
     </div>
   </div>
@@ -35,7 +37,7 @@ layout: base.njk
     {% if categoria == "selecciones" and seleccionEmbed %}
       <div class="inset post-body" style="margin-bottom:12px;">
         <h2>La selección</h2>
-        <iframe style="border-radius:12px" src="{{ seleccionEmbed }}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:0" src="{{ seleccionEmbed }}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     {% endif %}
 
@@ -44,7 +46,7 @@ layout: base.njk
     </div>
 
     <div style="margin-top:12px;display:flex;gap:8px;">
-      <a href="/posts/" class="btn">← Back to Posts</a>
+      <a href="/posts/" class="btn">← Volver a posts</a>
       <a href="/" class="btn">🏠 Home</a>
     </div>
   </div>

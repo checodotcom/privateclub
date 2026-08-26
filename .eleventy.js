@@ -11,6 +11,16 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
   });
 
+  eleventyConfig.addCollection("tagList", function(collectionApi) {
+    const tagSet = new Set();
+    collectionApi.getAll().forEach(item => {
+      (item.data.tags || []).forEach(tag => {
+        if (tag !== "posts") tagSet.add(tag);
+      });
+    });
+    return [...tagSet].sort();
+  });
+
   // Filters
   eleventyConfig.addFilter("dateFormat", function(date) {
     const d = new Date(date);

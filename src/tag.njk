@@ -7,6 +7,7 @@ pagination:
   filter:
     - all
     - posts
+    - tagList
 permalink: /tags/{{ tag }}/
 eleventyComputed:
   title: "Tag: {{ tag }}"
@@ -15,8 +16,10 @@ eleventyComputed:
   <div class="window-titlebar">
     <span>🏷️ Tag: {{ tag }}</span>
     <div class="titlebar-controls">
-      <span class="titlebar-btn">_</span>
-      <span class="titlebar-btn">□</span>
+      <input type="checkbox" id="tag-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="tag-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="tag-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="tag-window-maximize" class="titlebar-btn">□</label>
       <a href="/tags/" class="titlebar-btn">✕</a>
     </div>
   </div>
