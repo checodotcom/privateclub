@@ -47,6 +47,7 @@ collections:
     folder: "src/_data/categorias"
     create: true
     slug: "{{slug}}"
+    identifier_field: "nombre"
     extension: "yml"
     format: "yml"
     fields:
