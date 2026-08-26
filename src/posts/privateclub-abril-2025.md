@@ -11,7 +11,7 @@ tags:
 seleccionUrl: ''
 ---
 
-A inicios de mes, en algún Tiktok me había salido que abril iba a ser un mes que me daría demasiado, que iba a ser sumamente generoso y traería consigo muchos cambios. No suelo dar importancia a ese tipo de cosas, como la astrología ni números sagrados… nada de eso. Me causó curiosidad porque enfatizaba realmente lo dadivoso que iba a ser conmigo el mes por venir. Yo sólo pensé: “Pues a ver si sí’.
+A inicios de mes, en algún Tiktok me había salido que abril iba a ser un mes que me daría demasiado, que iba a ser sumamente generoso y traería consigo muchos cambios. No suelo dar importancia a ese tipo de cosas, como la astrología ni números sagrados… nada de eso. Me causó curiosidad porque enfatizaba realmente lo dadivoso que iba a ser conmigo el mes por venir. Yo sólo pensé: "Pues a ver si sí".
 
 Desde que decidí reubicarme fuera de la ciudad de manera indefinida, he sentido demasiada liberación, independencia, y una frescura por la vida que había olvidado. Intenté plasmar un poco de eso en la selección de este mes, además de muchas otras canciones que cruzaron mi camino y me parecieron interesantes de algún modo, o simplemente me divirtieron.
 
