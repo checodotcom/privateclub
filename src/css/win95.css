@@ -498,6 +498,11 @@ body {
   margin-bottom: 12px;
 }
 
+.post-body iframe,
+.post-body img {
+  max-width: 100%;
+}
+
 .post-body a {
   color: var(--accent);
 }
