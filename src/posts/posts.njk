@@ -1,11 +1,11 @@
 ---
 layout: base.njk
-title: All Posts
+title: Todos los posts
 permalink: /posts/
 ---
 <div class="window">
   <div class="window-titlebar">
-    <span>📰 All Posts ({{ collections.posts.length }})</span>
+    <span>📰 Todos los posts ({{ collections.posts.length }})</span>
     <div class="titlebar-controls">
       <span class="titlebar-btn">_</span>
       <span class="titlebar-btn">□</span>
@@ -35,7 +35,7 @@ permalink: /posts/
             {% if post.data.excerpt %}
               <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
             {% endif %}
-            <a href="{{ post.url }}" class="read-more">Read more »</a>
+            <a href="{{ post.url }}" class="read-more">Leer más »</a>
           </li>
         {% endfor %}
       </ul>
