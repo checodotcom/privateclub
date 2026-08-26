@@ -535,11 +535,9 @@ body {
 }
 
 .site-logo {
-  font-size: 48px;
-  line-height: 1;
-  color: var(--accent);
-  text-shadow: 2px 2px 0 var(--win-blue);
-  letter-spacing: -2px;
+  height: 64px;
+  width: auto;
+  display: block;
 }
 
 .site-tagline {
@@ -615,11 +613,11 @@ body {
   .desktop-grid {
     grid-template-columns: 1fr;
   }
-  .site-logo { font-size: 36px; }
+  .site-logo { height: 48px; }
   .post-title { font-size: 26px; }
 }
 
 /* ===== ACCENT / SIGNATURE ===== */
-/* Neon magenta (#ff00ff) leaks through on hover/active links,
-   the logo glow, and the blockquote bar — one bold color
-   against the otherwise period-faithful gray-and-navy palette */
+/* Neon magenta (#ff00ff) leaks through on hover/active links
+   and the blockquote bar — one bold color against the
+   otherwise period-faithful gray-and-navy palette */
