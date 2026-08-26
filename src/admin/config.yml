@@ -37,7 +37,7 @@ collections:
         widget: "select"
         multiple: true
         default: ["posts"]
-        options: ["posts", "seleccion", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world"]
+        options: ["posts", "seleccion", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world", "downtempo", "trip-hop"]
       - {label: "Cuerpo", name: "body", widget: "markdown"}
 
   - name: "categorias"
