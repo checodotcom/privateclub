@@ -8,6 +8,10 @@ categoria: selecciones
 tags:
   - posts
   - world
+  - seleccion
+seleccionUrl: ''
 ---
+
+## La selección
 
 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4bBqAnd0I5BLRlwc95fK0s?utm_source=generator&si=3d0075d31a67412f" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
