@@ -279,6 +279,42 @@ body {
   color: var(--win-white);
 }
 
+.tag-list .tag-more-label {
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 14px;
+  color: var(--win-blue);
+  text-decoration: underline;
+}
+
+.tag-list .tag-more-label:hover {
+  color: var(--win-highlight);
+}
+
+.tag-list .tag-more-label-end {
+  display: none;
+}
+
+.tag-list .tag-more-list {
+  display: none;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.tag-more-toggle:checked ~ .tag-more-label-start {
+  display: none;
+}
+
+.tag-more-toggle:checked ~ .tag-more-list {
+  display: flex;
+}
+
+.tag-more-toggle:checked ~ .tag-more-label-end {
+  display: inline;
+}
+
 /* ===== POST LIST ===== */
 .post-list {
   list-style: none;

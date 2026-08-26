@@ -13,7 +13,7 @@ title: Home
     </div>
   </div>
   <div class="window-content">
-    {% set recentPosts = collections.posts | limit(5) %}
+    {% set recentPosts = collections.posts | limit(3) %}
     {% if recentPosts.length %}
       <ul class="post-list">
         {% for post in recentPosts %}
