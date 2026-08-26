@@ -8,6 +8,7 @@ categoria: selecciones
 tags:
   - posts
   - electronic
+  - seleccion
 seleccionUrl: ''
 ---
 
