@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: Home
+permalink: /home/
+---
+<!-- LATEST POSTS WINDOW -->
+<div class="window" style="margin-bottom:12px;">
+  <div class="window-titlebar">
+    <span>📻 Más recientes</span>
+    <div class="titlebar-controls">
+      <input type="checkbox" id="home-recent-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="home-recent-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="home-recent-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="home-recent-window-maximize" class="titlebar-btn">□</label>
+    </div>
+  </div>
+  <div class="window-content">
+    {% set recentPosts = collections.posts | limit(3) %}
+    {% if recentPosts.length %}
+      <ul class="post-list">
+        {% for post in recentPosts %}
+          {% include "post-card.njk" %}
+        {% endfor %}
+      </ul>
+      <div style="margin-top:12px;">
+        <a href="/posts/" class="btn">📰 Ver todos los posts</a>
+      </div>
+    {% else %}
+      <div class="inset" style="color:#808080;">Sin posts. Próximamente</div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- WELCOME WINDOW -->
+<div class="window">
+  <div class="window-titlebar">
+    <span>💬 Bienvenido a privateclub</span>
+  </div>
+  <div class="window-content">
+    <div class="inset" style="font-size:16px;line-height:1.7;">
+      <strong>Hola Mundo.</strong> Este es un blog de música que destaca selecciones elegidas a altas horas de la noche.<br>
+      Inteno poner en palabras lo que siento al descubrir cada proyecto, y a veces hago playlists.<br><br>
+      Ponte unos audífonos y disfruta privateclub.
+    </div>
+  </div>
+</div>

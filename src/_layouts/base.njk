@@ -6,6 +6,10 @@
   <title>{{ title }} — privateclub</title>
   <link rel="stylesheet" href="/css/win95.css" />
   <link rel="icon" type="image/png" href="/img/pc-logo-corto.png" />
+  <script>
+    // Pages rendered inside a desktop window (iframe) drop the OS chrome.
+    if (window.top !== window.self) document.documentElement.classList.add('is-embedded');
+  </script>
 
   <meta property="og:title" content="{{ title }} — privateclub" />
   <meta property="og:description" content="{{ excerpt or 'Selecciones musicales para escuchas activas e íntimas.' }}" />
@@ -18,8 +22,28 @@
   <meta name="twitter:image" content="https://checoprivateclub.netlify.app/img/logo-white.png" />
 </head>
 <body>
+{% set section = "" %}
+{% if page.url == "/home/" %}{% set section = "home" %}
+{% elif page.url == "/posts/" or page.url.startsWith("/posts/") %}{% set section = "posts" %}
+{% elif page.url == "/albumes/" %}{% set section = "albumes" %}
+{% elif page.url == "/selecciones/" %}{% set section = "selecciones" %}
+{% elif page.url == "/about/" %}{% set section = "about" %}
+{% endif %}
 
+{% if desktop %}
+  <!-- DESKTOP HOME: wallpaper + icons + centered logo -->
+  <div class="desktop-home">
+    {% include "desktop-icons.njk" %}
+    <main class="desktop-hero">
+      {{ content | safe }}
+    </main>
+    <!-- Open windows are created here by /js/desktop.js -->
+    <div class="desktop-windows" id="desktop-windows"></div>
+  </div>
+{% else %}
   <div class="desktop">
+
+    {% include "desktop-icons.njk" %}
 
     <!-- SITE HEADER -->
     <div class="window site-header-window">
@@ -55,30 +79,31 @@
           </div>
           <div class="window-content">
 
+            {% if section == "about" %}
             <div class="sidebar-section">
-              <div class="sidebar-label">CARPETAS</div>
-              <ul class="sidebar-links">
-                <li><a href="/">🏠 Home</a></li>
-                <li><a href="/posts/">📰 Todos los posts</a></li>
-                <li><a href="/about/">👤 Acerca de</a></li>
-              </ul>
+              <div class="sidebar-label">CONTACTO</div>
+              <div class="contact-buttons">
+                {% if contacto.instagram %}<a class="btn" href="{{ contacto.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+                {% if contacto.spotify %}<a class="btn" href="{{ contacto.spotify }}" target="_blank" rel="noopener">Spotify</a>{% endif %}
+                {% if contacto.email %}<a class="btn" href="mailto:{{ contacto.email }}">Correo</a>{% endif %}
+              </div>
             </div>
-
+            {% else %}
             <div class="sidebar-section">
               <div class="sidebar-label">GÉNEROS</div>
+              {% set genresMain = [["ambient","Ambient"],["electronic","Electronic"],["jazz","Jazz"],["seleccion","selecciones"]] %}
+              {% set genresExtra = [["post-punk","Post-Punk"],["experimental","Experimental"],["world","World"],["noise","Noise"],["downtempo","Downtempo"],["trip-hop","Trip-Hop"]] %}
               <div class="tag-list">
-                <a class="tag" href="/tags/ambient/">Ambient</a>
-                <a class="tag" href="/tags/electronic/">Electronic</a>
-                <a class="tag" href="/tags/jazz/">Jazz</a>
-                <a class="tag" href="/tags/seleccion/">selecciones</a>
+                {% for g in genresMain %}
+                  {% if filterable %}<button type="button" class="tag tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
+                  {% else %}<a class="tag" href="/tags/{{ g[0] }}/">{{ g[1] }}</a>{% endif %}
+                {% endfor %}
                 <input type="checkbox" id="tags-more-toggle" class="tag-more-toggle" hidden>
                 <label for="tags-more-toggle" class="tag-more-label tag-more-label-start">más...</label>
-                <a class="tag tag-extra" href="/tags/post-punk/">Post-Punk</a>
-                <a class="tag tag-extra" href="/tags/experimental/">Experimental</a>
-                <a class="tag tag-extra" href="/tags/world/">World</a>
-                <a class="tag tag-extra" href="/tags/noise/">Noise</a>
-                <a class="tag tag-extra" href="/tags/downtempo/">Downtempo</a>
-                <a class="tag tag-extra" href="/tags/trip-hop/">Trip-Hop</a>
+                {% for g in genresExtra %}
+                  {% if filterable %}<button type="button" class="tag tag-extra tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
+                  {% else %}<a class="tag tag-extra" href="/tags/{{ g[0] }}/">{{ g[1] }}</a>{% endif %}
+                {% endfor %}
                 <label for="tags-more-toggle" class="tag-more-label tag-more-label-end">menos</label>
               </div>
             </div>
@@ -110,6 +135,8 @@
               </div>
             </div>
 
+            {% endif %}
+
           </div>
         </div>
       </aside>
@@ -121,21 +148,31 @@
 
     </div>
   </div>
+{% endif %}
 
   <!-- TASKBAR -->
   <div class="taskbar">
     <a href="/" class="start-btn">
-      <span class="start-icon"></span>
+      <img class="start-icon" src="/img/icons/start.svg" alt="" width="20" height="20" />
       Start
     </a>
-    {% if page.url != "/" %}
-      <div class="taskbar-nav">
-        <span class="taskbar-current">{{ title }}</span>
-      </div>
-    {% endif %}
-    <div class="taskbar-clock" id="clock">--:--</div>
+    <span class="taskbar-sep" aria-hidden="true"></span>
+    <div class="taskbar-windows" id="taskbar-windows">
+      {% if not desktop %}
+        <span class="taskbar-current">
+          {% if section %}<img src="/img/icons/{{ section }}.svg" alt="" width="16" height="16" />{% endif %}
+          {{ title }}
+        </span>
+      {% endif %}
+    </div>
+    <div class="taskbar-tray">
+      <span class="tray-icon" aria-hidden="true">♪</span>
+      <span class="taskbar-clock" id="clock">--:--</span>
+    </div>
   </div>
 
+  <script src="/js/desktop.js" defer></script>
+  {% if filterable %}<script src="/js/filter.js" defer></script>{% endif %}
   <script>
     // Live clock
     function updateClock() {

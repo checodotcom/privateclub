@@ -2,7 +2,7 @@
 layout: post.njk
 title: privateclub - Marzo 2025
 date: 2025-04-28
-image: ''
+image: /img/selecciones/privateclub-marzo-2025.jpg
 excerpt: La primera selección bajo privateclub pertenece a Marzo del 2025, y trae mucho de lo que vivía a inicios de mes.
 categoria: ''
 tags:

@@ -1,0 +1,42 @@
+---
+layout: base.njk
+title: Álbumes
+permalink: /albumes/
+filterable: true
+---
+{% set items = collections.posts | albumes %}
+<div class="window">
+  <div class="window-titlebar">
+    <span><img class="titlebar-icon" src="/img/icons/albumes.svg" alt="" width="16" height="16" /> Álbumes ({{ items.length }})</span>
+    <div class="titlebar-controls">
+      <input type="checkbox" id="albumes-window-minimize" class="window-toggle window-minimize sr-only">
+      <label for="albumes-window-minimize" class="titlebar-btn">_</label>
+      <input type="checkbox" id="albumes-window-maximize" class="window-toggle window-maximize sr-only">
+      <label for="albumes-window-maximize" class="titlebar-btn">□</label>
+      <a href="/" class="titlebar-btn">✕</a>
+    </div>
+  </div>
+  <div class="window-content">
+    {% if items.length %}
+      <ul class="album-grid">
+        {% for post in items %}
+          <li data-tags="{% for t in post.data.tags %}{% if t != 'posts' %}{{ t }} {% endif %}{% endfor %}">
+            <a class="album-tile" href="{{ post.url }}">
+              <span class="album-cover">
+                {% if post.data.image %}
+                  <img src="{{ post.data.image }}" alt="Portada de {{ post.data.title }}" loading="lazy" />
+                {% else %}
+                  <img class="album-cover-empty" src="/img/icons/albumes.svg" alt="" />
+                {% endif %}
+              </span>
+              <span class="album-title">{{ post.data.title }}</span>
+              <span class="album-date">{{ post.date | dateFormat }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="inset" style="color:#808080;">Todavía no hay álbumes reseñados. Próximamente.</div>
+    {% endif %}
+  </div>
+</div>

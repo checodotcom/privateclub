@@ -2,7 +2,7 @@
 layout: post.njk
 title: privateclub - Junio 2025
 date: 2025-06-30
-image: ''
+image: /img/selecciones/privateclub-junio-2025.jpg
 excerpt: Más exploraciones y tiempos relajados.
 categoria: selecciones
 tags:

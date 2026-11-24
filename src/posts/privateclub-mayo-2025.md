@@ -2,7 +2,7 @@
 layout: post.njk
 title: privateclub - Mayo 2025
 date: 2025-06-13
-image: ''
+image: /img/selecciones/privateclub-mayo-2025.jpg
 excerpt: Un suceso.
 categoria: ''
 tags:
