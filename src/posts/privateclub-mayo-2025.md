@@ -4,10 +4,9 @@ title: privateclub - Mayo 2025
 date: 2025-06-13
 image: /img/selecciones/privateclub-mayo-2025.jpg
 excerpt: Un suceso.
-categoria: ''
+formato: selecciones
 tags:
   - posts
-  - seleccion
   - electronic
 seleccionUrl: ''
 ---

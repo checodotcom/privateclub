@@ -28,6 +28,7 @@
 {% elif page.url == "/albumes/" %}{% set section = "albumes" %}
 {% elif page.url == "/selecciones/" %}{% set section = "selecciones" %}
 {% elif page.url == "/about/" %}{% set section = "about" %}
+{% elif page.url == "/mensajes/" %}{% set section = "mensajes" %}
 {% endif %}
 
 {% if desktop %}
@@ -69,77 +70,35 @@
     </div>
 
     <!-- GRID: sidebar + main -->
-    <div class="desktop-grid{% if page.url != '/' %} desktop-grid--nav-last{% endif %}">
+    <div class="desktop-grid{% if page.url != '/' and not filterable %} desktop-grid--nav-last{% endif %}{% if section != 'about' and not filterable %} desktop-grid--solo{% endif %}">
 
       <!-- SIDEBAR -->
-      <aside>
+      {% if section == "about" or filterable %}<aside>
         <div class="window sidebar-window">
           <div class="window-titlebar">
-            <span>📁 Navegación</span>
+            {% if section == "about" %}<span>📁 Contacto</span>
+            {% else %}<span class="app-title"><img class="titlebar-icon" src="/img/icons/etiquetas.svg" alt="" width="16" height="16" /> Etiquetas</span>{% endif %}
           </div>
           <div class="window-content">
-
             {% if section == "about" %}
             <div class="sidebar-section">
-              <div class="sidebar-label">CONTACTO</div>
               <div class="contact-buttons">
-                {% if contacto.instagram %}<a class="btn" href="{{ contacto.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
-                {% if contacto.spotify %}<a class="btn" href="{{ contacto.spotify }}" target="_blank" rel="noopener">Spotify</a>{% endif %}
-                {% if contacto.email %}<a class="btn" href="mailto:{{ contacto.email }}">Correo</a>{% endif %}
+                {% if contacto.instagram %}<a class="btn" href="{{ contacto.instagram }}" target="_blank" rel="noopener"><img src="/img/icons/instagram.svg" alt="" width="24" height="24" />Instagram</a>{% endif %}
+                {% if contacto.spotify %}<a class="btn" href="{{ contacto.spotify }}" target="_blank" rel="noopener"><img src="/img/icons/spotify.svg" alt="" width="24" height="24" />Spotify</a>{% endif %}
+                {% if contacto.email %}<a class="btn" href="mailto:{{ contacto.email }}"><img src="/img/icons/correo.svg" alt="" width="24" height="24" />Correo</a>{% endif %}
               </div>
             </div>
             {% else %}
-            <div class="sidebar-section">
-              <div class="sidebar-label">GÉNEROS</div>
-              {% set genresMain = [["ambient","Ambient"],["electronic","Electronic"],["jazz","Jazz"],["seleccion","selecciones"]] %}
-              {% set genresExtra = [["post-punk","Post-Punk"],["experimental","Experimental"],["world","World"],["noise","Noise"],["downtempo","Downtempo"],["trip-hop","Trip-Hop"]] %}
-              <div class="tag-list">
-                {% for g in genresMain %}
-                  {% if filterable %}<button type="button" class="tag tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
-                  {% else %}<a class="tag" href="/tags/{{ g[0] }}/">{{ g[1] }}</a>{% endif %}
-                {% endfor %}
-                <input type="checkbox" id="tags-more-toggle" class="tag-more-toggle" hidden>
-                <label for="tags-more-toggle" class="tag-more-label tag-more-label-start">más...</label>
-                {% for g in genresExtra %}
-                  {% if filterable %}<button type="button" class="tag tag-extra tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
-                  {% else %}<a class="tag tag-extra" href="/tags/{{ g[0] }}/">{{ g[1] }}</a>{% endif %}
-                {% endfor %}
-                <label for="tags-more-toggle" class="tag-more-label tag-more-label-end">menos</label>
-              </div>
-            </div>
-
-            <div class="sidebar-section">
-              <div class="sidebar-label">AHORA SUENA</div>
-              <div class="now-playing inset">
-                <span>♪</span>
-                <span class="np-track">{{ site.nowPlayingArtist }}<br>— {{ site.nowPlayingTrack }}</span>
-              </div>
-            </div>
-
-            {% if site.socialLinks and site.socialLinks.length %}
-            <div class="sidebar-section">
-              <div class="sidebar-label">REDES</div>
-              <ul class="sidebar-links">
-                {% for link in site.socialLinks %}
-                  <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
-                {% endfor %}
-              </ul>
+            <div class="tag-list">
+              {% set genres = [["ambient","Ambient"],["electronic","Electronic"],["jazz","Jazz"],["post-punk","Post-Punk"],["experimental","Experimental"],["world","World"],["noise","Noise"],["downtempo","Downtempo"],["trip-hop","Trip-Hop"]] %}
+              {% for g in genres %}
+                <button type="button" class="tag tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
+              {% endfor %}
             </div>
             {% endif %}
-
-            <div class="sidebar-section">
-              <div class="sidebar-label">CONTADOR DE VISITAS</div>
-              <div class="inset" style="font-size:14px;text-align:center;">
-                <span style="color:#000080;font-size:20px;">00,001</span><br>
-                visitas desde el lanzamiento
-              </div>
-            </div>
-
-            {% endif %}
-
           </div>
         </div>
-      </aside>
+      </aside>{% endif %}
 
       <!-- MAIN CONTENT -->
       <main>
@@ -150,12 +109,66 @@
   </div>
 {% endif %}
 
+  <!-- START MENU: suggestion form (Netlify Forms) -->
+  <div class="start-menu" id="start-menu" hidden>
+    <div class="start-menu-banner" aria-hidden="true"><span>private<i>club</i></span></div>
+    <form class="start-form" name="sugerencias" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="sugerencias" />
+      <p class="sr-only"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="start-form-title">
+        <img src="/img/icons/mensajes.svg" alt="" width="16" height="16" />
+        Enviar sugerencia
+      </div>
+      <label class="form-row">
+        <span>Nombre</span>
+        <input class="win-input" type="text" name="nombre" maxlength="80" required autocomplete="name" />
+      </label>
+      <label class="form-row">
+        <span>Email</span>
+        <input class="win-input" type="email" name="email" maxlength="120" required autocomplete="email" />
+      </label>
+      <label class="form-row">
+        <span>Sugerencia</span>
+        <textarea class="win-input" name="sugerencia" rows="3" maxlength="300" required placeholder="Ej. nombre de un artista o álbum"></textarea>
+        <small class="form-hint">Solo nombres, sin links.</small>
+      </label>
+      <label class="win-check">
+        <input type="checkbox" name="acepto" value="si" required />
+        <span class="win-check-box" aria-hidden="true"></span>
+        Acepto compartir mis datos
+      </label>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <div class="form-actions">
+        <button type="submit" class="btn">Enviar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success dialog shown after sending a suggestion -->
+  <div class="win-dialog-backdrop" id="sent-dialog" hidden>
+    <div class="window win-dialog" role="alertdialog" aria-modal="true" aria-labelledby="sent-dialog-title" aria-describedby="sent-dialog-msg">
+      <div class="window-titlebar">
+        <span id="sent-dialog-title">Envío exitoso</span>
+        <div class="titlebar-controls">
+          <button type="button" class="titlebar-btn" data-close aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+      <div class="win-dialog-body">
+        <img src="/img/icons/ok.svg" alt="" width="32" height="32" />
+        <p id="sent-dialog-msg">Gracias por el envío de sugerencia.</p>
+      </div>
+      <div class="win-dialog-actions">
+        <button type="button" class="btn" data-close>Ok</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TASKBAR -->
   <div class="taskbar">
-    <a href="/" class="start-btn">
+    <button type="button" class="start-btn" id="start-btn" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
       <img class="start-icon" src="/img/icons/start.svg" alt="" width="20" height="20" />
       Start
-    </a>
+    </button>
     <span class="taskbar-sep" aria-hidden="true"></span>
     <div class="taskbar-windows" id="taskbar-windows">
       {% if not desktop %}
@@ -172,6 +185,7 @@
   </div>
 
   <script src="/js/desktop.js" defer></script>
+  <script src="/js/start-menu.js" defer></script>
   {% if filterable %}<script src="/js/filter.js" defer></script>{% endif %}
   <script>
     // Live clock

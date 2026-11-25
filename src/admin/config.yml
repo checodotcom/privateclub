@@ -24,41 +24,26 @@ collections:
       - {label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true}
       - {label: "Imagen de portada", name: "image", widget: "image", required: false, media_folder: "/src/img", public_folder: "/img"}
       - {label: "Extracto", name: "excerpt", widget: "text", hint: "Descripción corta que aparece en la lista de posts."}
-      - label: "Categoría"
-        name: "categoria"
-        widget: "relation"
-        collection: "categorias"
-        search_fields: ["nombre"]
-        value_field: "{{slug}}"
-        display_fields: ["nombre"]
-        required: false
+      - label: "Formato"
+        name: "formato"
+        widget: "select"
+        options:
+          - {label: "Álbumes", value: "albumes"}
+          - {label: "Selections", value: "selecciones"}
+        default: "albumes"
+        hint: "Tipo de publicación. Define en qué ventana del escritorio aparece (Álbumes o Selections)."
       - label: "Tags"
         name: "tags"
         widget: "select"
         multiple: true
         default: ["posts"]
-        options: ["posts", "seleccion", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world", "downtempo", "trip-hop"]
+        options: ["posts", "ambient", "electronic", "jazz", "noise", "post-punk", "experimental", "world", "downtempo", "trip-hop"]
       - label: "La selección"
         name: "seleccionUrl"
         widget: "string"
         required: false
-        hint: "Link para compartir de una playlist, álbum o track de Spotify. Solo se muestra en el sitio cuando la Categoría es Selecciones."
+        hint: "Link para compartir de una playlist, álbum o track de Spotify. Solo se muestra en el sitio cuando el Formato es Selections."
       - {label: "Cuerpo", name: "body", widget: "markdown"}
-
-  - name: "categorias"
-    label: "Categorías"
-    label_singular: "Categoría"
-    description: "Tipos de contenido editorial (distinto de los tags de género musical)."
-    folder: "src/_data/categorias"
-    create: true
-    slug: "{{slug}}"
-    identifier_field: "nombre"
-    extension: "yml"
-    format: "yml"
-    fields:
-      - {label: "Nombre", name: "nombre", widget: "string"}
-      - {label: "Descripción", name: "descripcion", widget: "text", required: false}
-      - {label: "Color de acento", name: "color", widget: "color", required: false, allowInput: true}
 
   - name: "config"
     label: "Configuración"

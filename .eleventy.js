@@ -34,15 +34,13 @@ module.exports = function(eleventyConfig) {
     return arr.slice(0, limit);
   });
 
-  // Secciones del escritorio: Álbumes (reseñas) y Selections (playlists mensuales)
+  // Secciones del escritorio por formato de publicación: albumes y selecciones
   eleventyConfig.addFilter("albumes", function(posts) {
-    return (posts || []).filter(p => p.data.categoria === "resenas");
+    return (posts || []).filter(p => p.data.formato === "albumes");
   });
 
   eleventyConfig.addFilter("selecciones", function(posts) {
-    return (posts || []).filter(p =>
-      p.data.categoria === "selecciones" || (p.data.tags || []).includes("seleccion")
-    );
+    return (posts || []).filter(p => p.data.formato === "selecciones");
   });
 
   eleventyConfig.addFilter("markdown", function(content) {

@@ -11,7 +11,8 @@
     posts:       { title: 'Todos los posts', url: '/posts/' },
     albumes:     { title: 'Álbumes',         url: '/albumes/' },
     selecciones: { title: 'Selections',      url: '/selecciones/' },
-    about:       { title: 'Acerca de',       url: '/about/' }
+    about:       { title: 'Acerca de',       url: '/about/' },
+    mensajes:    { title: 'Mensajes',        url: '/mensajes/' }
   };
 
   var embedded = window.top !== window.self;
@@ -45,6 +46,7 @@
     if (path.indexOf('/albumes') === 0) return 'albumes';
     if (path.indexOf('/selecciones') === 0) return 'selecciones';
     if (path.indexOf('/about') === 0) return 'about';
+    if (path.indexOf('/mensajes') === 0) return 'mensajes';
     if (path.indexOf('/home') === 0) return 'home';
     return 'posts';
   }
@@ -66,12 +68,17 @@
 
   function create(key, path) {
     var sec = SECTIONS[key];
-    var w = { key: key, minimized: false };
+    // One window only: every desktop icon navigates inside it, like a browser tab
+    var w = { key: 'main', minimized: false, stack: [], goingBack: false };
 
     w.el = el('section', 'window app-window', { role: 'dialog', 'aria-label': sec.title });
     var bar = el('div', 'window-titlebar');
     var title = el('span', 'app-title');
-    title.appendChild(iconImg(key, 16));
+    w.backBtn = el('button', 'titlebar-btn titlebar-back', { type: 'button', 'data-act': 'back', 'aria-label': 'Atrás', disabled: '' });
+    w.backBtn.textContent = '◄';
+    title.appendChild(w.backBtn);
+    w.titleIcon = iconImg(key, 16);
+    title.appendChild(w.titleIcon);
     w.titleText = el('span', 'app-title-text');
     w.titleText.textContent = sec.title;
     title.appendChild(w.titleText);
@@ -102,21 +109,59 @@
     var step = (opened++ % 8) * 28;
     w.el.style.width = width + 'px';
     w.el.style.height = height + 'px';
+    w.baseHeight = height;
     w.el.style.left = Math.min(130 + step, Math.max(vw - width - 10, 0)) + 'px';
     w.el.style.top = Math.min(18 + step, Math.max(vh - height - 6, 0)) + 'px';
 
     // Taskbar button
     w.btn = el('button', 'taskbar-item', { type: 'button' });
-    w.btn.appendChild(iconImg(key, 16));
+    w.btnIcon = iconImg(key, 16);
+    w.btn.appendChild(w.btnIcon);
     w.btnText = el('span');
     w.btnText.textContent = sec.title;
     w.btn.appendChild(w.btnText);
     taskbar.appendChild(w.btn);
 
     shellRoot.appendChild(w.el);
-    wins[key] = w;
+    wins.main = w;
     bind(w);
     return w;
+  }
+
+  function setSection(w, key) {
+    if (w.section === key) return;
+    w.section = key;
+    w.titleIcon.src = w.btnIcon.src = '/img/icons/' + key + '.svg';
+  }
+
+  function navigate(w, path) {
+    if (w.iframe.getAttribute('src') === path && w.stack[w.stack.length - 1] === path) return;
+    w.iframe.src = path;
+  }
+
+  function goBack(w) {
+    if (w.stack.length < 2) return;
+    w.stack.pop();
+    w.goingBack = true;
+    w.iframe.src = w.stack[w.stack.length - 1];
+  }
+
+  function syncBack(w) {
+    if (w.stack.length > 1) w.backBtn.removeAttribute('disabled');
+    else w.backBtn.setAttribute('disabled', '');
+  }
+
+  // Short sections (Mensajes) get a window only as tall as their content
+  var FIT = { mensajes: true };
+  function fitHeight(w, doc) {
+    if (mobile.matches) return;
+    var h = w.baseHeight;
+    if (FIT[w.section]) {
+      var content = doc.querySelector('.desktop') || doc.body;
+      var chrome = w.el.offsetHeight - w.iframe.offsetHeight;
+      h = Math.min(content.offsetHeight + chrome + 4, w.baseHeight);
+    }
+    w.el.style.height = h + 'px';
   }
 
   function setTitle(w, text) {
@@ -131,6 +176,12 @@
     w.iframe.addEventListener('load', function () {
       try {
         var doc = w.iframe.contentDocument;
+        var here = w.iframe.contentWindow.location.pathname;
+        if (w.goingBack) w.goingBack = false;
+        else if (w.stack[w.stack.length - 1] !== here) w.stack.push(here);
+        setSection(w, sectionForPath(here));
+        syncBack(w);
+        fitHeight(w, doc);
         setTitle(w, cleanTitle(doc.title));
         doc.querySelectorAll('a[href]').forEach(function (a) {
           if (a.origin && a.origin !== location.origin && !a.target) {
@@ -142,6 +193,8 @@
     });
 
     w.el.addEventListener('pointerdown', function () { focusWin(w); });
+
+    w.backBtn.addEventListener('click', function () { goBack(w); });
 
     w.el.querySelector('.titlebar-controls').addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]');
@@ -173,25 +226,64 @@
     w.el.style.zIndex = ++zTop;
   }
 
+  /* Windows 95 style zoom: a dotted outline steps from one rectangle to another */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var STEPS = 9, STEP_MS = 18;
+
+  function zoomOutline(from, to, done) {
+    if (reduceMotion.matches || !from || !to) { done(); return; }
+    var box = el('div', 'zoom-outline');
+    document.body.appendChild(box);
+    var i = 0;
+    (function frame() {
+      i++;
+      var t = i / STEPS;
+      box.style.left = (from.left + (to.left - from.left) * t) + 'px';
+      box.style.top = (from.top + (to.top - from.top) * t) + 'px';
+      box.style.width = (from.width + (to.width - from.width) * t) + 'px';
+      box.style.height = (from.height + (to.height - from.height) * t) + 'px';
+      if (i < STEPS) setTimeout(frame, STEP_MS);
+      else { box.remove(); done(); }
+    })();
+  }
+
   function restore(w) {
+    if (!w.minimized) return;
     w.minimized = false;
     w.el.hidden = false;
+    var to = w.el.getBoundingClientRect();
+    w.el.style.visibility = 'hidden';
+    zoomOutline(w.btn.getBoundingClientRect(), to, function () {
+      w.el.style.visibility = '';
+    });
   }
 
   function minimize(w) {
+    var from = w.el.getBoundingClientRect();
     w.minimized = true;
     w.el.hidden = true;
     w.el.classList.remove('is-active');
     w.btn.classList.remove('is-active');
     focusTopmost();
+    zoomOutline(from, w.btn.getBoundingClientRect(), function () {});
   }
 
   function toggleMax(w) {
+    if (w.zooming) return;
+    var from = w.el.getBoundingClientRect();
     w.el.classList.toggle('is-max');
     var max = w.el.classList.contains('is-max');
     var btn = w.el.querySelector('[data-act="max"]');
     btn.textContent = max ? '❐' : '□';
     btn.setAttribute('aria-label', max ? 'Restaurar' : 'Maximizar');
+    if (mobile.matches) return;
+    var to = w.el.getBoundingClientRect();
+    w.zooming = true;
+    w.el.style.visibility = 'hidden';
+    zoomOutline(from, to, function () {
+      w.el.style.visibility = '';
+      w.zooming = false;
+    });
   }
 
   function closeWin(w) {
@@ -238,9 +330,9 @@
   }
 
   function open(key, path) {
-    var w = wins[key];
+    var w = wins.main;
     if (!w) w = create(key, path);
-    else if (path && w.iframe.getAttribute('src') !== path) w.iframe.src = path;
+    else navigate(w, path || SECTIONS[key].url);
     restore(w);
     focusWin(w);
   }
@@ -259,7 +351,7 @@
     var u;
     try { u = new URL(raw, location.origin); } catch (e) { return null; }
     if (u.origin !== location.origin) return null;
-    if (!/^\/(posts|albumes|selecciones|about|home|tags)\//.test(u.pathname)) return null;
+    if (!/^\/(posts|albumes|selecciones|about|mensajes|home|tags)\//.test(u.pathname)) return null;
     return u;
   }
 

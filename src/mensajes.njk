@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Mensajes
+permalink: /mensajes/
+---
+<div class="window">
+  <div class="window-titlebar">
+    <span>✉ Mensajes</span>
+  </div>
+  <div class="window-content">
+    <ul class="post-list">
+      {% for m in mensajes %}
+      <li class="post-card">
+        <div class="post-card-header">
+          <h2 class="post-card-title">{{ m.titulo }}</h2>
+          {% if m.fecha %}<span class="post-card-date">{{ m.fecha }}</span>{% endif %}
+        </div>
+        <p class="post-card-excerpt">{{ m.texto }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

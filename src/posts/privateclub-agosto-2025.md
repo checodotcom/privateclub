@@ -4,11 +4,10 @@ title: privateclub - Agosto 2025
 date: 2025-09-01
 image: /img/selecciones/privateclub-agosto-2025.jpg
 excerpt: Tampoco se dijo mucho en agosto.
-categoria: selecciones
+formato: selecciones
 tags:
   - posts
   - trip-hop
-  - seleccion
 seleccionUrl: ''
 ---
 

@@ -3,6 +3,22 @@ layout: base.njk
 title: Home
 permalink: /home/
 ---
+<!-- HEADER BANNER -->
+<div class="window home-banner" style="margin-bottom:12px;">
+  <div class="window-titlebar">
+    <span>🎵 privateclub — escuchas reposadas</span>
+  </div>
+  <div class="window-content">
+    <div class="site-hero">
+      <img class="site-logo" src="/img/logo.png" alt="private club" />
+      <div>
+        <div class="site-tagline">// selecciones musicales para escuchas activas e íntimas //</div>
+        <div class="site-tagline" style="margin-top:4px;color:#808080;">curaduría personal desde las profundidades de la web</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- LATEST POSTS WINDOW -->
 <div class="window" style="margin-bottom:12px;">
   <div class="window-titlebar">
@@ -23,24 +39,10 @@ permalink: /home/
         {% endfor %}
       </ul>
       <div style="margin-top:12px;">
-        <a href="/posts/" class="btn">📰 Ver todos los posts</a>
+        <a href="/posts/" class="btn btn-icon"><img src="/img/icons/posts.svg" alt="" width="16" height="16" />Ver todos los posts</a>
       </div>
     {% else %}
       <div class="inset" style="color:#808080;">Sin posts. Próximamente</div>
     {% endif %}
-  </div>
-</div>
-
-<!-- WELCOME WINDOW -->
-<div class="window">
-  <div class="window-titlebar">
-    <span>💬 Bienvenido a privateclub</span>
-  </div>
-  <div class="window-content">
-    <div class="inset" style="font-size:16px;line-height:1.7;">
-      <strong>Hola Mundo.</strong> Este es un blog de música que destaca selecciones elegidas a altas horas de la noche.<br>
-      Inteno poner en palabras lo que siento al descubrir cada proyecto, y a veces hago playlists.<br><br>
-      Ponte unos audífonos y disfruta privateclub.
-    </div>
   </div>
 </div>

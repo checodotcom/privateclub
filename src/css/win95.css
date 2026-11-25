@@ -48,9 +48,7 @@ html, body {
 
 /* ---- DESKTOP WALLPAPER: textured teal, like the Win95 stucco ---- */
 body {
-  background-color: #0b8a85;
-  background-image: url('/img/wallpaper.svg');
-  background-size: 256px 256px;
+  background-color: #f5f5f5;
 }
 
 /* ===== DESKTOP ICONS ===== */
@@ -72,7 +70,7 @@ body {
   gap: 4px;
   padding: 2px;
   text-decoration: none;
-  color: var(--win-white);
+  color: var(--win-darker);
   font-size: 17px;
   line-height: 1;
   text-align: center;
@@ -85,15 +83,16 @@ body {
   image-rendering: pixelated;
 }
 
-.desktop-icon span {
+.desktop-icon span:not(.icon-img) {
   padding: 1px 3px;
   max-width: 84px;
   border: 1px dotted transparent;
 }
 
-.desktop-icon:hover span,
-.desktop-icon:focus-visible span,
-.desktop-icon.is-active span {
+.desktop-icon:hover span:not(.icon-img),
+.desktop-icon:focus-visible span:not(.icon-img),
+.desktop-icon.is-active span:not(.icon-img) {
+  color: var(--win-white);
   background: var(--win-blue);
   border-color: #ffff80;
 }
@@ -106,6 +105,33 @@ body {
 .desktop-icon:hover img,
 .desktop-icon.is-active img {
   filter: brightness(0.75) sepia(1) hue-rotate(190deg) saturate(3);
+}
+
+/* Mensajes: envelope with unread badge */
+.icon-img { position: relative; display: block; width: 32px; height: 32px; }
+.icon-img img { width: 32px; height: 32px; }
+.icon-badge {
+  position: absolute;
+  top: -5px;
+  right: -9px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  background: #f00;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font: 700 12px/13px 'VT323', monospace;
+  text-align: center;
+}
+
+.desktop-grid.desktop-grid--solo { grid-template-columns: 1fr; }
+
+.message-title {
+  margin: 0 0 10px;
+  color: var(--win-blue);
+  font-size: 24px;
 }
 
 /* ===== HOME: bare desktop with the logo in the middle ===== */
@@ -127,7 +153,7 @@ body {
 }
 
 .hero-logo {
-  width: min(340px, 70vw);
+  width: min(460px, 70vw);
   height: auto;
   display: block;
 }
@@ -191,7 +217,8 @@ body {
   line-height: 1;
 }
 
-.start-btn:active {
+.start-btn:active,
+.start-btn.is-pressed {
   border-top: 2px solid var(--win-black);
   border-left: 2px solid var(--win-black);
   border-right: 2px solid var(--win-white);
@@ -780,7 +807,7 @@ body {
     padding: 10px 4px 0;
   }
   .desktop-icon { font-size: 15px; padding: 2px 0; }
-  .desktop-icon span { max-width: 66px; padding: 1px 2px; }
+  .desktop-icon span:not(.icon-img) { max-width: 66px; padding: 1px 2px; }
   .desktop { padding: 0 12px 52px; }
   .desktop-icons { margin-bottom: 8px; }
   .desktop-hero { padding: 24px 16px 56px; }
@@ -806,7 +833,7 @@ body {
 .desktop-windows {
   position: fixed;
   inset: 0 0 32px 0;
-  z-index: 20;
+  z-index: 60; /* above the desktop icons (50), below the taskbar */
   pointer-events: none; /* only the windows catch clicks; the desktop stays clickable */
 }
 
@@ -854,6 +881,26 @@ body {
 
 button.titlebar-btn { appearance: none; }
 
+/* Buttons with a pixel icon before the label */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-icon img { image-rendering: pixelated; }
+
+/* Back arrow at the left of the single window's title bar */
+.titlebar-back {
+  flex-shrink: 0;
+  font-size: 10px;
+  color: #000;
+}
+.titlebar-back:disabled {
+  color: var(--win-dark);
+  text-shadow: 1px 1px 0 var(--win-white);
+  cursor: default;
+}
+
 .app-body {
   position: relative;
   flex: 1;
@@ -889,6 +936,16 @@ button.titlebar-btn { appearance: none; }
   inset: 0 !important;
   width: auto !important;
   height: auto !important;
+}
+
+/* Win95 minimize / maximize / restore: stepped dotted frame */
+.zoom-outline {
+  position: fixed;
+  z-index: 9999;
+  box-sizing: border-box;
+  border: 3px dotted #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
 }
 
 /* ===== PAGES RENDERED INSIDE A WINDOW ===== */
@@ -980,9 +1037,19 @@ button.titlebar-btn { appearance: none; }
 }
 
 .contact-buttons .btn {
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
   padding: 6px 12px;
   font-size: 18px;
+}
+
+.contact-buttons .btn img {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
 }
 
 /* ===== GENRE FILTERS (toggle buttons) ===== */
@@ -1007,3 +1074,141 @@ button.tag {
 
 .tag-filter:focus-visible { outline: 1px dotted var(--win-black); outline-offset: 1px; }
 .filter-empty { margin-top: 8px; color: var(--win-dark); }
+
+/* ===== START MENU: suggestion form ===== */
+.start-menu {
+  position: fixed;
+  left: 2px;
+  bottom: 30px;
+  z-index: 10000;
+  display: flex;
+  width: 330px;
+  max-width: calc(100vw - 4px);
+  background: var(--win-gray);
+  border-top: 2px solid var(--win-white);
+  border-left: 2px solid var(--win-white);
+  border-right: 2px solid var(--win-black);
+  border-bottom: 2px solid var(--win-black);
+  box-shadow: inset -1px -1px 0 var(--win-dark), inset 1px 1px 0 #dfdfdf;
+}
+.start-menu[hidden] { display: none; }
+
+/* Vertical banner on the left, like the "Windows 95" strip */
+.start-menu-banner {
+  flex-shrink: 0;
+  width: 30px;
+  background: #f5f5f5;
+  border-right: 1px solid var(--win-dark);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+.start-menu-banner span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--win-dark);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+.start-menu-banner i { color: var(--win-dark); }
+
+.start-form {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 17px;
+}
+.start-form-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--win-dark);
+  box-shadow: 0 1px 0 var(--win-white);
+  font-size: 19px;
+  font-weight: bold;
+}
+.start-form img { image-rendering: pixelated; }
+
+.form-row { display: flex; flex-direction: column; gap: 3px; }
+.form-row > span { display: flex; align-items: center; gap: 5px; }
+
+.win-input {
+  width: 100%;
+  padding: 3px 4px;
+  background: var(--win-white);
+  color: var(--win-black);
+  font-family: 'VT323', monospace;
+  font-size: 17px;
+  border-top: 2px solid var(--win-dark);
+  border-left: 2px solid var(--win-dark);
+  border-right: 2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
+  box-shadow: inset 1px 1px 0 var(--win-black);
+  border-radius: 0;
+  outline: none;
+  resize: vertical;
+}
+.win-input:focus { box-shadow: inset 1px 1px 0 var(--win-black), 0 0 0 1px var(--win-blue); }
+.form-hint { color: var(--win-darker); font-size: 14px; }
+.form-hint.is-error { color: #c00000; }
+.start-form.is-loading, .start-form.is-loading * { cursor: wait; }
+.form-actions .btn:disabled { color: var(--win-dark); text-shadow: 1px 1px 0 var(--win-white); }
+
+/* Checkbox drawn as the classic sunken white square */
+.win-check { position: relative; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.win-check input { position: absolute; opacity: 0; width: 13px; height: 13px; margin: 0; }
+.win-check-box {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  background: var(--win-white);
+  border-top: 1px solid var(--win-dark);
+  border-left: 1px solid var(--win-dark);
+  border-right: 1px solid var(--win-white);
+  border-bottom: 1px solid var(--win-white);
+  box-shadow: inset 1px 1px 0 var(--win-black), inset -1px -1px 0 #dfdfdf;
+}
+.win-check input:checked + .win-check-box {
+  background: var(--win-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath d='M6 0h1v2H6zM5 1h1v2H5zM4 2h1v2H4zM3 3h1v2H3zM2 4h1v2H2zM1 3h1v2H1zM0 2h1v2H0z'/%3E%3C/svg%3E") center / 7px 7px no-repeat;
+}
+.win-check input:focus-visible + .win-check-box { outline: 1px dotted var(--win-black); outline-offset: 2px; }
+
+.form-status { min-height: 1em; font-size: 15px; color: var(--win-blue); }
+.form-actions { display: flex; justify-content: flex-end; }
+.form-actions .btn { min-width: 90px; justify-content: center; }
+
+/* ===== WIN95 MESSAGE BOX ===== */
+.win-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.win-dialog-backdrop[hidden] { display: none; }
+.win-dialog { width: 340px; max-width: 100%; }
+.win-dialog .titlebar-btn { padding: 0; line-height: 1; }
+.win-dialog-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px 10px;
+  font-size: 18px;
+}
+.win-dialog-body img { flex-shrink: 0; image-rendering: pixelated; }
+.win-dialog-actions {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0 14px;
+}
+.win-dialog-actions .btn { min-width: 84px; justify-content: center; }
+.win-dialog-actions .btn:focus-visible { outline: 1px dotted var(--win-black); outline-offset: -5px; }
