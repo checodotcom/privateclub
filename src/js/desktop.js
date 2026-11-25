@@ -7,11 +7,12 @@
   'use strict';
 
   var SECTIONS = {
-    home:        { title: 'Home',            url: '/home/' },
+    home:        { title: 'Inicio',          url: '/home/' },
     posts:       { title: 'Todos los posts', url: '/posts/' },
     albumes:     { title: 'Álbumes',         url: '/albumes/' },
     selecciones: { title: 'Selecciones',     url: '/selecciones/' },
     about:       { title: 'Acerca de',       url: '/about/' },
+    correo:      { title: 'Contactar',       url: '/contactar/' },
     mensajes:    { title: 'Mensajes',        url: '/mensajes/' }
   };
 
@@ -43,6 +44,7 @@
   var opened = 0;
 
   function sectionForPath(path) {
+    if (path === '/contactar/') return 'correo';
     if (path.indexOf('/albumes') === 0) return 'albumes';
     if (path.indexOf('/selecciones') === 0) return 'selecciones';
     if (path.indexOf('/about') === 0) return 'about';
@@ -68,8 +70,8 @@
 
   function create(key, path) {
     var sec = SECTIONS[key];
-    // One window only: every desktop icon navigates inside it, like a browser tab
-    var w = { key: 'main', minimized: false, stack: [], goingBack: false };
+    // Sections share the main window. Contactar keeps its own draft while browsing.
+    var w = { key: key === 'correo' ? 'correo' : 'main', minimized: false, stack: [], goingBack: false };
 
     w.el = el('section', 'window app-window', { role: 'dialog', 'aria-label': sec.title });
     var bar = el('div', 'window-titlebar');
@@ -78,6 +80,7 @@
     w.backBtn.textContent = '◄';
     title.appendChild(w.backBtn);
     w.titleIcon = iconImg(key, 16);
+    w.titleIcon.hidden = key === 'home';
     title.appendChild(w.titleIcon);
     w.titleText = el('span', 'app-title-text');
     w.titleText.textContent = sec.title;
@@ -106,6 +109,11 @@
     // Position: cascade from the top-left, sized to the viewport
     var vw = window.innerWidth, vh = window.innerHeight - 32;
     var width = Math.min(880, vw - 150), height = Math.min(600, vh - 40);
+    if (key === 'correo') {
+      width = Math.min(620, vw - 32);
+      height = Math.min(456, vh - 16);
+      w.backBtn.hidden = true;
+    }
     var step = (opened++ % 8) * 28;
     w.el.style.width = width + 'px';
     w.el.style.height = height + 'px';
@@ -123,7 +131,7 @@
     taskbar.appendChild(w.btn);
 
     shellRoot.appendChild(w.el);
-    wins.main = w;
+    wins[w.key] = w;
     bind(w);
     return w;
   }
@@ -131,6 +139,7 @@
   function setSection(w, key) {
     if (w.section === key) return;
     w.section = key;
+    w.titleIcon.hidden = key === 'home';
     w.titleIcon.src = w.btnIcon.src = '/img/icons/' + key + '.svg';
   }
 
@@ -154,14 +163,17 @@
   // Short sections (Mensajes) get a window only as tall as their content
   var FIT = { mensajes: true };
   function fitHeight(w, doc) {
-    if (mobile.matches) return;
+    var fit = !!FIT[w.section];
+    w.el.classList.toggle('is-fit', fit);
     var h = w.baseHeight;
-    if (FIT[w.section]) {
+    if (fit) {
       var content = doc.querySelector('.desktop') || doc.body;
       var chrome = w.el.offsetHeight - w.iframe.offsetHeight;
       h = Math.min(content.offsetHeight + chrome + 4, w.baseHeight);
     }
-    w.el.style.height = h + 'px';
+    w.fitH = h;
+    w.el.style.setProperty('--fit-h', h + 'px');
+    if (!mobile.matches) w.el.style.height = h + 'px';
   }
 
   function setTitle(w, text) {
@@ -180,6 +192,11 @@
         if (w.goingBack) w.goingBack = false;
         else if (w.stack[w.stack.length - 1] !== here) w.stack.push(here);
         setSection(w, sectionForPath(here));
+        var correo = doc.querySelector('[data-open-correo]');
+        if (correo) correo.addEventListener('click', function (event) {
+          event.preventDefault();
+          open('correo');
+        });
         syncBack(w);
         fitHeight(w, doc);
         setTitle(w, cleanTitle(doc.title));
@@ -330,9 +347,9 @@
   }
 
   function open(key, path) {
-    var w = wins.main;
+    var w = key === 'correo' ? wins.correo : wins.main;
     if (!w) w = create(key, path);
-    else navigate(w, path || SECTIONS[key].url);
+    else if (key !== 'correo') navigate(w, path || SECTIONS[key].url);
     restore(w);
     focusWin(w);
   }

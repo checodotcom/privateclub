@@ -4,9 +4,9 @@ title: Todos los posts
 permalink: /posts/
 filterable: true
 ---
-<div class="window">
+<div class="window window--catalog">
   <div class="window-titlebar">
-    <span>📰 Todos los posts ({{ collections.posts.length }})</span>
+    <span>📰 Todos los posts</span>
     <div class="titlebar-controls">
       <input type="checkbox" id="posts-window-minimize" class="window-toggle window-minimize sr-only">
       <label for="posts-window-minimize" class="titlebar-btn">_</label>
@@ -15,7 +15,7 @@ filterable: true
       <a href="/" class="titlebar-btn">✕</a>
     </div>
   </div>
-  <div class="window-content">
+  <div class="window-content inset">
     {% if collections.posts.length %}
       <ul class="post-list">
         {% for post in collections.posts %}
@@ -46,4 +46,6 @@ filterable: true
       <div class="inset" style="color:#808080;">Sin posts. Próximamente</div>
     {% endif %}
   </div>
+  {% set itemCount = collections.posts.length %}
+  {% include "status-bar.njk" %}
 </div>

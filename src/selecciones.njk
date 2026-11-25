@@ -5,9 +5,9 @@ permalink: /selecciones/
 filterable: true
 ---
 {% set items = collections.posts | selecciones %}
-<div class="window">
+<div class="window window--catalog">
   <div class="window-titlebar">
-    <span><img class="titlebar-icon" src="/img/icons/selecciones.svg" alt="" width="16" height="16" /> Selecciones ({{ items.length }})</span>
+    <span><img class="titlebar-icon" src="/img/icons/selecciones.svg" alt="" width="16" height="16" /> Selecciones</span>
     <div class="titlebar-controls">
       <input type="checkbox" id="selecciones-window-minimize" class="window-toggle window-minimize sr-only">
       <label for="selecciones-window-minimize" class="titlebar-btn">_</label>
@@ -16,9 +16,9 @@ filterable: true
       <a href="/" class="titlebar-btn">✕</a>
     </div>
   </div>
-  <div class="window-content">
+  <div class="window-content inset">
     {% if items.length %}
-      <ul class="album-grid">
+      <ul class="album-grid selection-grid">
         {% for post in items %}
           <li data-tags="{% for t in post.data.tags %}{% if t != 'posts' %}{{ t }} {% endif %}{% endfor %}">
             <a class="album-tile" href="{{ post.url }}">
@@ -39,4 +39,6 @@ filterable: true
       <div class="inset" style="color:#808080;">Todavía no hay selections. Próximamente.</div>
     {% endif %}
   </div>
+  {% set itemCount = items.length %}
+  {% include "status-bar.njk" %}
 </div>
