@@ -34,6 +34,15 @@ module.exports = function(eleventyConfig) {
     return arr.slice(0, limit);
   });
 
+  // Secciones del escritorio por formato de publicación: albumes y selecciones
+  eleventyConfig.addFilter("albumes", function(posts) {
+    return (posts || []).filter(p => p.data.formato === "albumes");
+  });
+
+  eleventyConfig.addFilter("selecciones", function(posts) {
+    return (posts || []).filter(p => p.data.formato === "selecciones");
+  });
+
   eleventyConfig.addFilter("markdown", function(content) {
     return markdownIt.render(content || "");
   });

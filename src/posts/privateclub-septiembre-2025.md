@@ -2,13 +2,12 @@
 layout: post.njk
 title: privateclub - Septiembre 2025
 date: 2025-10-03
-image: ''
+image: /img/selecciones/privateclub-septiembre-2025.jpg
 excerpt: Repitiendo patrones.
-categoria: selecciones
+formato: selecciones
 tags:
   - posts
   - downtempo
-  - seleccion
 seleccionUrl: ''
 ---
 

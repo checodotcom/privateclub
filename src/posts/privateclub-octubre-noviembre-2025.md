@@ -2,13 +2,12 @@
 layout: post.njk
 title: privateclub - Octubre Noviembre 2025
 date: 2025-12-05
-image: ''
+image: /img/selecciones/privateclub-octubre-noviembre-2025.jpg
 excerpt: Se juntaron los meses.
-categoria: selecciones
+formato: selecciones
 tags:
   - posts
   - world
-  - seleccion
 seleccionUrl: ''
 ---
 

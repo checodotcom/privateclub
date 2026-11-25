@@ -2,12 +2,11 @@
 layout: post.njk
 title: privateclub - Abril 2025
 date: 2025-05-03
-image: ''
+image: /img/selecciones/privateclub-abril-2025.jpg
 excerpt: Comenzando a tirar nuevas raíces.
-categoria: ''
+formato: selecciones
 tags:
   - posts
-  - seleccion
 seleccionUrl: ''
 ---
 

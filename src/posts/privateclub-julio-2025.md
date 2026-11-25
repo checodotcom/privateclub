@@ -2,13 +2,12 @@
 layout: post.njk
 title: privateclub - Julio 2025
 date: 2025-08-05
-image: ''
+image: /img/selecciones/privateclub-julio-2025.jpg
 excerpt: Sin palabras. Sólo música.
-categoria: selecciones
+formato: selecciones
 tags:
   - posts
   - electronic
-  - seleccion
 seleccionUrl: ''
 ---
 

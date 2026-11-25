@@ -6,6 +6,10 @@
   <title>{{ title }} — privateclub</title>
   <link rel="stylesheet" href="/css/win95.css" />
   <link rel="icon" type="image/png" href="/img/pc-logo-corto.png" />
+  <script>
+    // Pages rendered inside a desktop window (iframe) drop the OS chrome.
+    if (window.top !== window.self) document.documentElement.classList.add('is-embedded');
+  </script>
 
   <meta property="og:title" content="{{ title }} — privateclub" />
   <meta property="og:description" content="{{ excerpt or 'Selecciones musicales para escuchas activas e íntimas.' }}" />
@@ -18,8 +22,29 @@
   <meta name="twitter:image" content="https://checoprivateclub.netlify.app/img/logo-white.png" />
 </head>
 <body>
+{% set section = "" %}
+{% if page.url == "/home/" %}{% set section = "home" %}
+{% elif page.url == "/posts/" or page.url.startsWith("/posts/") %}{% set section = "posts" %}
+{% elif page.url == "/albumes/" %}{% set section = "albumes" %}
+{% elif page.url == "/selecciones/" %}{% set section = "selecciones" %}
+{% elif page.url == "/about/" %}{% set section = "about" %}
+{% elif page.url == "/mensajes/" %}{% set section = "mensajes" %}
+{% endif %}
 
+{% if desktop %}
+  <!-- DESKTOP HOME: wallpaper + icons + centered logo -->
+  <div class="desktop-home">
+    {% include "desktop-icons.njk" %}
+    <main class="desktop-hero">
+      {{ content | safe }}
+    </main>
+    <!-- Open windows are created here by /js/desktop.js -->
+    <div class="desktop-windows" id="desktop-windows"></div>
+  </div>
+{% else %}
   <div class="desktop">
+
+    {% include "desktop-icons.njk" %}
 
     <!-- SITE HEADER -->
     <div class="window site-header-window">
@@ -45,74 +70,35 @@
     </div>
 
     <!-- GRID: sidebar + main -->
-    <div class="desktop-grid{% if page.url != '/' %} desktop-grid--nav-last{% endif %}">
+    <div class="desktop-grid{% if page.url != '/' and not filterable %} desktop-grid--nav-last{% endif %}{% if section != 'about' and not filterable %} desktop-grid--solo{% endif %}">
 
       <!-- SIDEBAR -->
-      <aside>
+      {% if section == "about" or filterable %}<aside>
         <div class="window sidebar-window">
           <div class="window-titlebar">
-            <span>📁 Navegación</span>
+            {% if section == "about" %}<span>📁 Contacto</span>
+            {% else %}<span class="app-title"><img class="titlebar-icon" src="/img/icons/etiquetas.svg" alt="" width="16" height="16" /> Etiquetas</span>{% endif %}
           </div>
           <div class="window-content">
-
+            {% if section == "about" %}
             <div class="sidebar-section">
-              <div class="sidebar-label">CARPETAS</div>
-              <ul class="sidebar-links">
-                <li><a href="/">🏠 Home</a></li>
-                <li><a href="/posts/">📰 Todos los posts</a></li>
-                <li><a href="/about/">👤 Acerca de</a></li>
-              </ul>
-            </div>
-
-            <div class="sidebar-section">
-              <div class="sidebar-label">GÉNEROS</div>
-              <div class="tag-list">
-                <a class="tag" href="/tags/ambient/">Ambient</a>
-                <a class="tag" href="/tags/electronic/">Electronic</a>
-                <a class="tag" href="/tags/jazz/">Jazz</a>
-                <a class="tag" href="/tags/seleccion/">selecciones</a>
-                <input type="checkbox" id="tags-more-toggle" class="tag-more-toggle" hidden>
-                <label for="tags-more-toggle" class="tag-more-label tag-more-label-start">más...</label>
-                <a class="tag tag-extra" href="/tags/post-punk/">Post-Punk</a>
-                <a class="tag tag-extra" href="/tags/experimental/">Experimental</a>
-                <a class="tag tag-extra" href="/tags/world/">World</a>
-                <a class="tag tag-extra" href="/tags/noise/">Noise</a>
-                <a class="tag tag-extra" href="/tags/downtempo/">Downtempo</a>
-                <a class="tag tag-extra" href="/tags/trip-hop/">Trip-Hop</a>
-                <label for="tags-more-toggle" class="tag-more-label tag-more-label-end">menos</label>
+              <div class="contact-buttons">
+                {% if contacto.instagram %}<a class="btn" href="{{ contacto.instagram }}" target="_blank" rel="noopener"><img src="/img/icons/instagram.svg" alt="" width="24" height="24" />Instagram</a>{% endif %}
+                {% if contacto.spotify %}<a class="btn" href="{{ contacto.spotify }}" target="_blank" rel="noopener"><img src="/img/icons/spotify.svg" alt="" width="24" height="24" />Spotify</a>{% endif %}
+                {% if contacto.email %}<a class="btn" href="mailto:{{ contacto.email }}"><img src="/img/icons/correo.svg" alt="" width="24" height="24" />Correo</a>{% endif %}
               </div>
             </div>
-
-            <div class="sidebar-section">
-              <div class="sidebar-label">AHORA SUENA</div>
-              <div class="now-playing inset">
-                <span>♪</span>
-                <span class="np-track">{{ site.nowPlayingArtist }}<br>— {{ site.nowPlayingTrack }}</span>
-              </div>
-            </div>
-
-            {% if site.socialLinks and site.socialLinks.length %}
-            <div class="sidebar-section">
-              <div class="sidebar-label">REDES</div>
-              <ul class="sidebar-links">
-                {% for link in site.socialLinks %}
-                  <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
-                {% endfor %}
-              </ul>
+            {% else %}
+            <div class="tag-list">
+              {% set genres = [["ambient","Ambient"],["electronic","Electronic"],["jazz","Jazz"],["post-punk","Post-Punk"],["experimental","Experimental"],["world","World"],["noise","Noise"],["downtempo","Downtempo"],["trip-hop","Trip-Hop"]] %}
+              {% for g in genres %}
+                <button type="button" class="tag tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
+              {% endfor %}
             </div>
             {% endif %}
-
-            <div class="sidebar-section">
-              <div class="sidebar-label">CONTADOR DE VISITAS</div>
-              <div class="inset" style="font-size:14px;text-align:center;">
-                <span style="color:#000080;font-size:20px;">00,001</span><br>
-                visitas desde el lanzamiento
-              </div>
-            </div>
-
           </div>
         </div>
-      </aside>
+      </aside>{% endif %}
 
       <!-- MAIN CONTENT -->
       <main>
@@ -121,21 +107,86 @@
 
     </div>
   </div>
+{% endif %}
+
+  <!-- START MENU: suggestion form (Netlify Forms) -->
+  <div class="start-menu" id="start-menu" hidden>
+    <div class="start-menu-banner" aria-hidden="true"><span>private<i>club</i></span></div>
+    <form class="start-form" name="sugerencias" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="sugerencias" />
+      <p class="sr-only"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="start-form-title">
+        <img src="/img/icons/mensajes.svg" alt="" width="16" height="16" />
+        Enviar sugerencia
+      </div>
+      <label class="form-row">
+        <span>Nombre</span>
+        <input class="win-input" type="text" name="nombre" maxlength="80" required autocomplete="name" />
+      </label>
+      <label class="form-row">
+        <span>Email</span>
+        <input class="win-input" type="email" name="email" maxlength="120" required autocomplete="email" />
+      </label>
+      <label class="form-row">
+        <span>Sugerencia</span>
+        <textarea class="win-input" name="sugerencia" rows="3" maxlength="300" required placeholder="Ej. nombre de un artista o álbum"></textarea>
+        <small class="form-hint">Solo nombres, sin links.</small>
+      </label>
+      <label class="win-check">
+        <input type="checkbox" name="acepto" value="si" required />
+        <span class="win-check-box" aria-hidden="true"></span>
+        Acepto compartir mis datos
+      </label>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <div class="form-actions">
+        <button type="submit" class="btn">Enviar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success dialog shown after sending a suggestion -->
+  <div class="win-dialog-backdrop" id="sent-dialog" hidden>
+    <div class="window win-dialog" role="alertdialog" aria-modal="true" aria-labelledby="sent-dialog-title" aria-describedby="sent-dialog-msg">
+      <div class="window-titlebar">
+        <span id="sent-dialog-title">Envío exitoso</span>
+        <div class="titlebar-controls">
+          <button type="button" class="titlebar-btn" data-close aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+      <div class="win-dialog-body">
+        <img src="/img/icons/ok.svg" alt="" width="32" height="32" />
+        <p id="sent-dialog-msg">Gracias por el envío de sugerencia.</p>
+      </div>
+      <div class="win-dialog-actions">
+        <button type="button" class="btn" data-close>Ok</button>
+      </div>
+    </div>
+  </div>
 
   <!-- TASKBAR -->
   <div class="taskbar">
-    <a href="/" class="start-btn">
-      <span class="start-icon"></span>
+    <button type="button" class="start-btn" id="start-btn" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
+      <img class="start-icon" src="/img/icons/start.svg" alt="" width="20" height="20" />
       Start
-    </a>
-    {% if page.url != "/" %}
-      <div class="taskbar-nav">
-        <span class="taskbar-current">{{ title }}</span>
-      </div>
-    {% endif %}
-    <div class="taskbar-clock" id="clock">--:--</div>
+    </button>
+    <span class="taskbar-sep" aria-hidden="true"></span>
+    <div class="taskbar-windows" id="taskbar-windows">
+      {% if not desktop %}
+        <span class="taskbar-current">
+          {% if section %}<img src="/img/icons/{{ section }}.svg" alt="" width="16" height="16" />{% endif %}
+          {{ title }}
+        </span>
+      {% endif %}
+    </div>
+    <div class="taskbar-tray">
+      <span class="tray-icon" aria-hidden="true">♪</span>
+      <span class="taskbar-clock" id="clock">--:--</span>
+    </div>
   </div>
 
+  <script src="/js/desktop.js" defer></script>
+  <script src="/js/start-menu.js" defer></script>
+  {% if filterable %}<script src="/js/filter.js" defer></script>{% endif %}
   <script>
     // Live clock
     function updateClock() {
