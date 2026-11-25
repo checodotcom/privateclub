@@ -10,7 +10,7 @@
     home:        { title: 'Home',            url: '/home/' },
     posts:       { title: 'Todos los posts', url: '/posts/' },
     albumes:     { title: 'Álbumes',         url: '/albumes/' },
-    selecciones: { title: 'Selections',      url: '/selecciones/' },
+    selecciones: { title: 'Selecciones',     url: '/selecciones/' },
     about:       { title: 'Acerca de',       url: '/about/' },
     mensajes:    { title: 'Mensajes',        url: '/mensajes/' }
   };

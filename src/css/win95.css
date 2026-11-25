@@ -60,7 +60,7 @@ body {
   width: 88px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 22px;
 }
 
 .desktop-icon {
@@ -803,11 +803,12 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px 0;
-    padding: 10px 4px 0;
+    flex-wrap: nowrap;
+    gap: 0 2px;
+    padding: 10px 2px 0;
   }
-  .desktop-icon { font-size: 15px; padding: 2px 0; }
-  .desktop-icon span:not(.icon-img) { max-width: 66px; padding: 1px 2px; }
+  .desktop-icon { flex: 1 1 0; min-width: 0; font-size: 12px; padding: 2px 0; }
+  .desktop-icon span:not(.icon-img) { max-width: 100%; padding: 1px 0; overflow-wrap: anywhere; }
   .desktop { padding: 0 12px 52px; }
   .desktop-icons { margin-bottom: 8px; }
   .desktop-hero { padding: 24px 16px 56px; }
