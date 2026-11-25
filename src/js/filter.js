@@ -6,6 +6,7 @@
   if (!buttons.length || !items.length) return;
 
   var list = items[0].parentNode;
+  var status = document.querySelector('[data-filter-status]');
   var empty = document.createElement('div');
   empty.className = 'inset filter-empty';
   empty.hidden = true;
@@ -24,6 +25,7 @@
       if (ok) shown++;
     });
     empty.hidden = shown !== 0;
+    if (status) status.textContent = shown + (shown === 1 ? ' elemento' : ' elementos');
   }
 
   buttons.forEach(function (b) {

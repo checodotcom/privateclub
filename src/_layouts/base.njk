@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"{% if desktop %} class="is-desktop-shell"{% endif %}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,15 +11,21 @@
     if (window.top !== window.self) document.documentElement.classList.add('is-embedded');
   </script>
 
+  {% set shareImage = "https://checoprivateclub.netlify.app/img/privateclub-share.png" %}
   <meta property="og:title" content="{{ title }} — privateclub" />
   <meta property="og:description" content="{{ excerpt or 'Selecciones musicales para escuchas activas e íntimas.' }}" />
-  <meta property="og:image" content="https://checoprivateclub.netlify.app/img/logo-white.png" />
+  <meta property="og:image" content="{{ shareImage }}" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:image:alt" content="Logotipo de privateclub en gris sobre fondo blanco" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://checoprivateclub.netlify.app{{ page.url }}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{{ title }} — privateclub" />
   <meta name="twitter:description" content="{{ excerpt or 'Selecciones musicales para escuchas activas e íntimas.' }}" />
-  <meta name="twitter:image" content="https://checoprivateclub.netlify.app/img/logo-white.png" />
+  <meta name="twitter:image" content="{{ shareImage }}" />
+  <meta name="twitter:image:alt" content="Logotipo de privateclub en gris sobre fondo blanco" />
 </head>
 <body>
 {% set section = "" %}
@@ -74,20 +80,28 @@
 
       <!-- SIDEBAR -->
       {% if section == "about" or filterable %}<aside>
-        <div class="window sidebar-window">
+        <div class="window sidebar-window{% if section == 'about' %} contact-window{% endif %}">
           <div class="window-titlebar">
             {% if section == "about" %}<span>📁 Contacto</span>
             {% else %}<span class="app-title"><img class="titlebar-icon" src="/img/icons/etiquetas.svg" alt="" width="16" height="16" /> Etiquetas</span>{% endif %}
           </div>
           <div class="window-content">
             {% if section == "about" %}
-            <div class="sidebar-section">
-              <div class="contact-buttons">
-                {% if contacto.instagram %}<a class="btn" href="{{ contacto.instagram }}" target="_blank" rel="noopener"><img src="/img/icons/instagram.svg" alt="" width="24" height="24" />Instagram</a>{% endif %}
-                {% if contacto.spotify %}<a class="btn" href="{{ contacto.spotify }}" target="_blank" rel="noopener"><img src="/img/icons/spotify.svg" alt="" width="24" height="24" />Spotify</a>{% endif %}
-                {% if contacto.email %}<a class="btn" href="mailto:{{ contacto.email }}"><img src="/img/icons/correo.svg" alt="" width="24" height="24" />Correo</a>{% endif %}
-              </div>
-            </div>
+            {% set contactLinks = [
+              { label: "Instagram", icon: "instagram", address: contacto.instagram },
+              { label: "Spotify", icon: "spotify", address: contacto.spotify },
+              { label: "Correo", icon: "correo", address: contacto.email }
+            ] | selectattr("address") %}
+            <ul class="contact-icons inset">
+              {% for link in contactLinks %}
+                <li>
+                  <a class="contact-icon"{% if link.icon == "correo" %} href="/#correo" data-open-correo{% else %} href="{{ link.address }}" target="_blank" rel="noopener"{% endif %}>
+                    <img src="/img/icons/{{ link.icon }}.svg" alt="" width="32" height="32">
+                    <span>{{ link.label }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
             {% else %}
             <div class="tag-list">
               {% for tag in collections.tagList %}
@@ -96,6 +110,10 @@
             </div>
             {% endif %}
           </div>
+          {% if section == "about" %}
+            {% set itemCount = contactLinks.length %}
+            {% include "status-bar.njk" %}
+          {% endif %}
         </div>
       </aside>{% endif %}
 
@@ -165,7 +183,7 @@
   <!-- TASKBAR -->
   <div class="taskbar">
     <button type="button" class="start-btn" id="start-btn" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
-      <img class="start-icon" src="/img/icons/sugerencia.svg" alt="" width="20" height="20" />
+      <img class="start-icon" src="/img/icons/sugerencia.svg" alt="" width="16" height="16" />
       Sugerencia
     </button>
     <span class="taskbar-sep" aria-hidden="true"></span>

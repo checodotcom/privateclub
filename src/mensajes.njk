@@ -20,4 +20,6 @@ permalink: /mensajes/
       {% endfor %}
     </ul>
   </div>
+  {% set itemCount = mensajes.length %}
+  {% include "status-bar.njk" %}
 </div>

@@ -5,9 +5,9 @@ permalink: /albumes/
 filterable: true
 ---
 {% set items = collections.posts | albumes %}
-<div class="window">
+<div class="window window--catalog">
   <div class="window-titlebar">
-    <span><img class="titlebar-icon" src="/img/icons/albumes.svg" alt="" width="16" height="16" /> Álbumes ({{ items.length }})</span>
+    <span><img class="titlebar-icon" src="/img/icons/albumes.svg" alt="" width="16" height="16" /> Álbumes</span>
     <div class="titlebar-controls">
       <input type="checkbox" id="albumes-window-minimize" class="window-toggle window-minimize sr-only">
       <label for="albumes-window-minimize" class="titlebar-btn">_</label>
@@ -16,7 +16,7 @@ filterable: true
       <a href="/" class="titlebar-btn">✕</a>
     </div>
   </div>
-  <div class="window-content">
+  <div class="window-content inset">
     {% if items.length %}
       <ul class="album-grid">
         {% for post in items %}
@@ -39,4 +39,6 @@ filterable: true
       <div class="inset" style="color:#808080;">Todavía no hay álbumes reseñados. Próximamente.</div>
     {% endif %}
   </div>
+  {% set itemCount = items.length %}
+  {% include "status-bar.njk" %}
 </div>

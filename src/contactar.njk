@@ -1,0 +1,50 @@
+---
+title: Contactar
+permalink: /contactar/
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contactar — privateclub</title>
+  <link rel="stylesheet" href="/css/win95.css">
+  <script src="/js/contactar.js" defer></script>
+</head>
+<body class="contactar">
+  <main>
+    <form name="contactar" action="/contactar/" method="post" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contactar">
+      <p hidden><label>Deja este campo vacío <input name="bot-field" autocomplete="off"></label></p>
+      <div class="correo-toolbar">
+        <button type="submit" class="btn btn-icon">
+          <img src="/img/icons/correo.svg" width="20" height="20" alt="">
+          <span class="correo-hourglass" aria-hidden="true" hidden></span>
+          <span class="correo-send-label">Enviar</span>
+        </button>
+      </div>
+      <div class="correo-fields">
+        <label for="nombre">Nombre</label><input class="win-input" id="nombre" name="nombre" autocomplete="name" required>
+        <label for="email">Correo</label><input class="win-input" id="email" name="email" type="email" autocomplete="email" required>
+        <label for="para">Para</label><input class="win-input" id="para" value="privateclub" readonly>
+      </div>
+      <label for="mensaje">Mensaje</label>
+      <textarea class="win-input" id="mensaje" name="mensaje" rows="8" required></textarea>
+      <p class="correo-status" role="status"></p>
+    </form>
+  </main>
+  <dialog class="window win-dialog correo-dialog" aria-labelledby="correo-dialog-title" aria-describedby="correo-dialog-message">
+    <form method="dialog">
+      <div class="window-titlebar">
+        <span id="correo-dialog-title">Envío exitoso</span>
+        <button class="titlebar-btn" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="win-dialog-body">
+        <img src="/img/icons/ok.svg" alt="" width="32" height="32">
+        <p id="correo-dialog-message">Tu mensaje se envió correctamente.</p>
+      </div>
+      <div class="win-dialog-actions"><button class="btn" autofocus>Aceptar</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
