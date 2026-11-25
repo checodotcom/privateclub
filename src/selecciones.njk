@@ -1,13 +1,13 @@
 ---
 layout: base.njk
-title: Selections
+title: Selecciones
 permalink: /selecciones/
 filterable: true
 ---
 {% set items = collections.posts | selecciones %}
 <div class="window">
   <div class="window-titlebar">
-    <span><img class="titlebar-icon" src="/img/icons/selecciones.svg" alt="" width="16" height="16" /> Selections ({{ items.length }})</span>
+    <span><img class="titlebar-icon" src="/img/icons/selecciones.svg" alt="" width="16" height="16" /> Selecciones ({{ items.length }})</span>
     <div class="titlebar-controls">
       <input type="checkbox" id="selecciones-window-minimize" class="window-toggle window-minimize sr-only">
       <label for="selecciones-window-minimize" class="titlebar-btn">_</label>

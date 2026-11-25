@@ -90,9 +90,8 @@
             </div>
             {% else %}
             <div class="tag-list">
-              {% set genres = [["ambient","Ambient"],["electronic","Electronic"],["jazz","Jazz"],["post-punk","Post-Punk"],["experimental","Experimental"],["world","World"],["noise","Noise"],["downtempo","Downtempo"],["trip-hop","Trip-Hop"]] %}
-              {% for g in genres %}
-                <button type="button" class="tag tag-filter" data-tag="{{ g[0] }}" aria-pressed="false">{{ g[1] }}</button>
+              {% for tag in collections.tagList %}
+                <button type="button" class="tag tag-filter" data-tag="{{ tag }}" aria-pressed="false">{{ tag | tagLabel }}</button>
               {% endfor %}
             </div>
             {% endif %}
@@ -116,7 +115,7 @@
       <input type="hidden" name="form-name" value="sugerencias" />
       <p class="sr-only"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
       <div class="start-form-title">
-        <img src="/img/icons/mensajes.svg" alt="" width="16" height="16" />
+        <img src="/img/icons/sugerencia.svg" alt="" width="16" height="16" />
         Enviar sugerencia
       </div>
       <label class="form-row">
@@ -166,8 +165,8 @@
   <!-- TASKBAR -->
   <div class="taskbar">
     <button type="button" class="start-btn" id="start-btn" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
-      <img class="start-icon" src="/img/icons/start.svg" alt="" width="20" height="20" />
-      Start
+      <img class="start-icon" src="/img/icons/sugerencia.svg" alt="" width="20" height="20" />
+      Sugerencia
     </button>
     <span class="taskbar-sep" aria-hidden="true"></span>
     <div class="taskbar-windows" id="taskbar-windows">

@@ -30,6 +30,11 @@ module.exports = function(eleventyConfig) {
     return `${day}/${month}/${year}`;
   });
 
+  // "post-punk" -> "Post-Punk"
+  eleventyConfig.addFilter("tagLabel", function(tag) {
+    return String(tag).split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("-");
+  });
+
   eleventyConfig.addFilter("limit", function(arr, limit) {
     return arr.slice(0, limit);
   });
